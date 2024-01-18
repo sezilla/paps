@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Register</title>
+    <link rel="icon" type="image/x-icon" href="images/papsicon.png" />
+    <link href="/dist/output.css" rel="stylesheet" />
+  </head>
+  <body
+    class="bg-fixed bg-no-repeat bg-cover bg-center"
+    style="background-image: url(images/liquid-cheese.svg)"
+  >
+    <div
+      class="flex flex-row bg-gradient-to-tl from-[#4c8bbb] to-[#ffffff] my-20 relative mx-auto w-full max-w-2xl px-5 pt-8 pb-8 overflow-hidden shadow-xl ring-1 ring-gray-900/5 lg:max-w-3xl sm:rounded-xl sm:px-10"
+    >
+      <div class="w-full px-3 pt-3">
+        <div class="text-center">
+          <img src="images/PAPS Logo.png" alt="PAPS Logo" class="px-[250px]" />
+          <p class="mt-2 text-gray-500">Register below for new account</p>
+        </div>
+        <div class="mt-5">
+          <div class="grid grid-cols-2 justify-between gap-2 pb-5">
+            <div class="relative mt-6">
+              <input
+                type="text"
+                name="fname"
+                id="fname"
+                placeholder="First Name"
+                required
+                class="bg-transparent peer peer mt-1 w-72 border-b-[1px] border-[#401b1b] px-1 py-1 placeholder:text-transparent focus:border-gray-500 focus:outline-none"
+                autocomplete="NA"
+              />
+              <label
+                for="fname"
+                class="pointer-events-none absolute top-0 left-1 origin-left -translate-y-1/2 transform text-sm text-gray-800 opacity-75 transition-all duration-100 ease-in-out peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-focus:top-0 peer-focus:pl-0 peer-focus:text-sm peer-focus:text-gray-800"
+                >First Name</label
+              >
+            </div>
+            <div class="relative mt-6">
+              <input
+                type="text"
+                name="mname"
+                id="mname"
+                placeholder="Middle Name"
+                required
+                class="bg-transparent peer peer mt-1 w-72 border-b-[1px] border-[#401b1b] px-1 py-1 placeholder:text-transparent focus:border-gray-500 focus:outline-none"
+                autocomplete="NA"
+              />
+              <label
+                for="mname"
+                class="pointer-events-none absolute top-0 left-1 origin-left -translate-y-1/2 transform text-sm text-gray-800 opacity-75 transition-all duration-100 ease-in-out peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-focus:top-0 peer-focus:pl-0 peer-focus:text-sm peer-focus:text-gray-800"
+                >Middle Name Name</label
+              >
+            </div>
+            <div class="relative mt-6">
+              <input
+                type="text"
+                name="lname"
+                id="lname"
+                placeholder="Last Name"
+                required
+                class="bg-transparent peer peer mt-1 w-72 border-b-[1px] border-[#401b1b] px-1 py-1 placeholder:text-transparent focus:border-gray-500 focus:outline-none"
+                autocomplete="NA"
+              />
+              <label
+                for="lname"
+                class="pointer-events-none absolute top-0 left-1 origin-left -translate-y-1/2 transform text-sm text-gray-800 opacity-75 transition-all duration-100 ease-in-out peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-focus:top-0 peer-focus:pl-0 peer-focus:text-sm peer-focus:text-gray-800"
+                >Last Name</label
+              >
+            </div>
+            <div class="relative mt-6">
+              <input
+                type="date"
+                name="bday"
+                id="bday"
+                placeholder="Date of Birth"
+                required
+                class="bg-transparent peer peer mt-1 w-72 border-b-[1px] border-[#401b1b] px-1 py-1 placeholder:text-transparent focus:border-gray-500 focus:outline-none"
+                autocomplete="NA"
+              />
+              <label
+                for="bday"
+                class="pointer-events-none absolute top-0 left-1 origin-left -translate-y-1/2 transform text-sm text-gray-800 opacity-75 transition-all duration-100 ease-in-out peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-focus:top-0 peer-focus:pl-0 peer-focus:text-sm peer-focus:text-gray-800"
+                >Date of Birth</label
+              >
+            </div>
+
+            <div class="relative mt-6">
+              <input
+                type="email"
+                name="email"
+                id="email"
+                placeholder="Email Address"
+                class="bg-transparent peer peer mt-1 w-72 border-b-[1px] border-[#401b1b] px-1 py-1 placeholder:text-transparent focus:border-gray-500 focus:outline-none"
+                autocomplete="NA"
+              />
+              <label
+                for="email"
+                class="pointer-events-none absolute top-0 left-1 origin-left -translate-y-1/2 transform text-sm text-gray-800 opacity-75 transition-all duration-100 ease-in-out peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-focus:top-0 peer-focus:pl-0 peer-focus:text-sm peer-focus:text-gray-800"
+                >Email Address</label
+              >
+            </div>
+            <div class="relative mt-6">
+              <input
+                type="text"
+                name="eid"
+                id="eid"
+                placeholder="Employee Id"
+                required
+                class="bg-transparent peer peer mt-1 w-72 border-b-[1px] border-[#401b1b] px-1 py-1 placeholder:text-transparent focus:border-gray-500 focus:outline-none"
+                autocomplete="NA"
+              />
+              <label
+                for="eid"
+                class="pointer-events-none absolute top-0 left-1 origin-left -translate-y-1/2 transform text-sm text-gray-800 opacity-75 transition-all duration-100 ease-in-out peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-focus:top-0 peer-focus:pl-0 peer-focus:text-sm peer-focus:text-gray-800"
+                >Employee Id</label
+              >
+            </div>
+            <div class="relative mt-6">
+              <input
+                type="password"
+                name="password"
+                id="password"
+                placeholder="Password"
+                required
+                class="bg-transparent peer peer mt-1 w-72 border-b-[1px] border-[#401b1b] px-1 py-1 placeholder:text-transparent focus:border-gray-500 focus:outline-none"
+              />
+              <label
+                for="password"
+                class="pointer-events-none absolute top-0 left-1 origin-left -translate-y-1/2 transform text-sm text-gray-800 opacity-75 transition-all duration-100 ease-in-out peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-focus:top-0 peer-focus:pl-0 peer-focus:text-sm peer-focus:text-gray-800"
+                >Password (Must be at least 6 characters)</label
+              >
+            </div>
+            <div class="relative mt-6">
+              <input
+                type="password"
+                name="re-pass"
+                id="re-pass"
+                placeholder="Re-enter Password"
+                required
+                class="bg-transparent peer peer mt-1 w-72 border-b-[1px] border-[#401b1b] px-1 py-1 placeholder:text-transparent focus:border-gray-500 focus:outline-none"
+              />
+              <label
+                for="re-pass"
+                class="pointer-events-none absolute top-0 left-1 origin-left -translate-y-1/2 transform text-sm text-gray-800 opacity-75 transition-all duration-100 ease-in-out peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-focus:top-0 peer-focus:pl-0 peer-focus:text-sm peer-focus:text-gray-800"
+                >Re-enter Password</label
+              >
+            </div>
+          </div>
+          <div class="my-3">
+            <button
+              id="submit"
+              type="submit"
+              onclick="register()"
+              class="content-center w-full rounded-full bg-[#ab644b] px-3 py-3 text-[#f2f2eb] focus:bg-gray-600 focus:outline-none"
+            >
+              Register
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+         https://firebase.google.com/docs/web/setup#available-libraries -->
+  <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
+
+  <!-- Our script must be loaded after firebase references -->
+  <script src="script.js"></script>
+</html>
