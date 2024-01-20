@@ -20,7 +20,7 @@ if(isset($_POST["submit"])){
 
 
 
-window.location.href="formrequest.html";
+window.location.href="qrgenerator.php";
 </script><?php
 
 
@@ -166,6 +166,8 @@ window.location.href="formrequest.html";
                     />
                   </div>
                 </div>
+
+                <!--Program-->
                 <div
                   class="flex flex-col items-stretch w-[33%] ml-5 max-md:w-full max-md:ml-0"
                 >
@@ -197,6 +199,8 @@ window.location.href="formrequest.html";
                 </div>
               </div>
             </div>
+
+            <!--End-Program-->
 
             <div class="justify-between mt-10 max-md:max-w-full">
               <div

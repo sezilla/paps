@@ -1,5 +1,6 @@
 <?php
 include("db_conn.php");
+//include("searchajax2.php");
 //$columns = array('program');
 
 // Only get the column if it exists in the above columns array, if it doesn't exist the database table will be sorted by the first item in the columns array.
@@ -8,16 +9,27 @@ include("db_conn.php");
 // Get the sort order for the column, ascending or descending, default is ascending.
 $sort_order = isset($_GET['order']) && strtolower($_GET['order']) == 'desc' ? 'DESC' : 'ASC';
 
-$program = isset($_POST['program']);
-echo $program;
+if (isset($_GET['progvalue'])) {
+  $program = $_GET['progvalue'];
+}
 
-/*if ($result = $conn->query('SELECT * FROM request ORDER BY ' .  $column . ' ' . $sort_order)) {
-	// Some variables we need for the table.
-	$up_or_down = str_replace(array('ASC','DESC'), array('up','down'), $sort_order); 
-	$asc_or_desc = $sort_order == 'ASC' ? 'desc' : 'asc';
-	$add_class = ' class="highlight"';
-}*/
 
+// Number of rows per page
+$rowsPerPage = 10;
+
+// Current page, default to 1
+if (isset($_GET['page']) && is_numeric($_GET['page'])) {
+    $currentPage = $_GET['page'];
+} else {
+    $currentPage = 1;
+}
+
+// Calculate the limit for the SQL query
+$limitStart = ($currentPage - 1) * $rowsPerPage;
+
+// Fetch data with LIMIT clause
+$sql = "SELECT * FROM request LIMIT $limitStart, $rowsPerPage";
+$query = mysqli_query($conn, $sql);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -30,6 +42,7 @@ echo $program;
     <link rel="icon" type="image/x-icon" href="images/papsicon.png" />
     <link rel="stylesheet" href="table.css" type="text/css">
     <link href="/dist/output.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
     <style>
     #dropbtn {}
 
@@ -204,9 +217,11 @@ echo $program;
                 <div class="items-stretch flex gap-4 rounded-3xl">
                   <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/75453035-f6ab-4cc0-b8e2-9e687ed98ce1?apiKey=949dc02d5acc420a9a54e7e811a36e3e&" 
                   class="aspect-square object-contain object-center w-8 overflow-hidden shrink-0-w-full ml-3 pl-2" alt="Search Icon" />
-                  <div class="text-stone-500 text-lg leading-7 self-center whitespace-nowrap mt-2 mb-1">
-                    Search here...
+                  
+                  <div class="text-stone-500  text-lg leading-7 self-center whitespace-nowrap mt-2 mb-1">
+                    <input type = "search" class="bg-zinc-100" id = "getName" placeholder = "Search here..." autocomplete = "off">
                   </div>
+
                 </div>
               </div>
               <div class="flex gap-3 px-5">
@@ -221,8 +236,8 @@ echo $program;
                   alt="Program Icon" />
               </div>
             </a-->
-            <form action="request.php" method="get">
-            <select name="program" id="dropdown" class="items-center w-[160px] h-[40px] flex px-5 py-0.5 rounded-[40px] 
+            <!--form action="request.php" method="get"-->
+            <div name="program" id="dropdown" class="items-center w-[160px] h-[40px] flex px-5 py-0.5 rounded-[40px] 
                 border-2 border-solid border-stone-500">
                 <div class="justify-center items-center flex w-[127px] max-w-full gap-4">
                 <div class="text-stone-500 text-lg leading-7 my-auto">Program</div>
@@ -242,19 +257,19 @@ echo $program;
           if ($result-> num_rows > 0) {
               while ($row =  $result-> fetch_assoc()){
                 //$program = $row['program'];
-                //echo "<a href='requests-copy.php?column=program&progvalue=". $row["program"]."'>". $row["program"]."</a>";
-                echo "<option value= '". $row["program"]."'>". $row["program"]."</a>";
+                echo "<a href='requests-copy.php?column=program&progvalue=". $row["program"]."'>". $row["program"]."</a>";
+                //echo "<option value= '". $row["program"]."'>". $row["program"]."</a>";
               }
           }
           else{
               echo "0 results";
           }
 
-          $conn-> close();
+          //$conn-> close();
           ?>
               </div>
-        </select>
-        </form>
+        </div>
+        <!--/form-->
 
                 <!--Year Level SECTION-->
             <!--a href="#" class="justify-center items-center w-[175px] h-[40px] flex px-5 py-2 rounded-[40px] 
@@ -329,8 +344,9 @@ echo $program;
                 <th class="text-orange-950 font-semibold leading-6">Form Type</th>
                 <th class="text-orange-950 font-semibold leading-6">Action</th>
                 </tr>
-          
-          <?php 
+          <!--SHOWDATA-->
+          <tbody id="showdata">
+          <!--?php 
           include("db_conn.php");
           
           if (isset($_GET['order'])){
@@ -338,6 +354,9 @@ echo $program;
           }
           else if (isset($_GET['progvalue'])){
             $sql = "SELECT fullname, student_num, ctrl_num, dob, program, reqtype from request WHERE program = '$program'";
+          }
+          else if (isset($_GET['order']) && isset($_GET['progvalue'])) {
+            $sql = "SELECT fullname, student_num, ctrl_num, dob, program, reqtype from request WHERE program = '$program' ORDER BY reqtype $sort_order";
           }
           else {
             $sql = "SELECT fullname, student_num, ctrl_num, dob, program, reqtype from request";
@@ -356,7 +375,7 @@ echo $program;
                   <td>". $row["program"]."</td>
                   <td>". $row["reqtype"]."</td>
                   <td>
-                  <button class='bg-stone-500 text-white text-sm leading-5 font-medium rounded-3xl px-4 py-2.5 mr-5'>Print</button>
+                  <button class='bg-stone-500 text-white text-sm leading-5 font-medium rounded-3xl px-4 py-2.5 mr-5'>View</button>
                         </td>
                   </tr>";
               }
@@ -366,14 +385,85 @@ echo $program;
               echo "0 results";
           }
 
-          $conn-> close();
-          ?>
+          //$conn-> close();
+          ?-->
+          <?php 
+          if (isset($_GET['order'])){
+            $sql = "SELECT fullname, student_num, ctrl_num, dob, program, reqtype from request ORDER BY reqtype $sort_order LIMIT $limitStart, $rowsPerPage";
+          }
+          else if (isset($_GET['progvalue'])){
+            $sql = "SELECT fullname, student_num, ctrl_num, dob, program, reqtype from request WHERE program = '$program' LIMIT $limitStart, $rowsPerPage";
+          }
+          else if (isset($_GET['order']) && isset($_GET['progvalue'])) {
+            $sql = "SELECT fullname, student_num, ctrl_num, dob, program, reqtype from request WHERE program = '$program' ORDER BY reqtype $sort_order LIMIT $limitStart, $rowsPerPage";
+          }
+          else {
+            $sql = "SELECT fullname, student_num, ctrl_num, dob, program, reqtype from request LIMIT $limitStart, $rowsPerPage";
+          }
+          
+          //$sql = "SELECT fullname, student_num, ctrl_num, dob, program, reqtype from request";
+          
+          $result = $conn-> query($sql);   
+          while ($row = mysqli_fetch_assoc($result)) { ?>
+                    <tr>
+            <td><?php echo $row["fullname"]; ?></td>
+            <td><?php echo $row["student_num"]; ?></td>
+            <td><?php echo $row["ctrl_num"]; ?></td>
+            <td><?php echo $row["dob"]; ?></td>
+            <td><?php echo $row["program"]; ?></td>
+            <td><?php echo $row["reqtype"]; ?></td>
+            <td>
+                <button class='bg-stone-500 text-white text-sm leading-5 font-medium rounded-3xl px-4 py-2.5 mr-5'>View</button>
+            </td>
+        </tr>
+    <?php } ?>
+          </tbody>
           </div>
         </table>
     </section>
-        </div>
+    
+<!--PREVIOUS & NEXT PAGE BUTTON-->
+<div class="flex justify-center mt-4 mb-4">
+    <?php
+    $resultnumrows = mysqli_query($conn, "SELECT * FROM request");
+    $totalRows = mysqli_num_rows($resultnumrows);
+    $totalPages = ceil($totalRows / $rowsPerPage);
 
+    // Previous page button
+    if ($currentPage > 1) {
+        echo "<a href='requests-copy.php?page=" . ($currentPage - 1) . "' class='mx-2 px-4 py-2 bg-stone-500 text-white rounded-3xl'>Previous</a>";
+    }
+
+    // Page numbers
+    for ($i = 1; $i <= $totalPages; $i++) {
+        echo "<a href='requests-copy.php?page=$i' class='mx-2 px-4 py-2 bg-stone-500 text-white rounded-3xl'>$i</a>";
+    }
+
+    // Next page button
+    if ($currentPage < $totalPages) {
+        echo "<a href='requests-copy.php?page=" . ($currentPage + 1) . "' class='mx-2 px-4 py-2 bg-stone-500 text-white rounded-3xl'>Next</a>";
+    }
+    ?>
+    </div>
+<!--PAGE BUTTON END-->
+        
+<script src="table.js"></script>
     <script>
+      $(document).ready(function(){
+   $('#getName').on("keyup", function(){
+     var getName = $(this).val();
+     $.ajax({
+       method:'POST',
+       url:'searchajax.php',
+       data:{name:getName},
+       success:function(response)
+       {
+            $("#showdata").html(response);
+       } 
+     });
+   });
+  });
+      
           function SORTdropdown() {
             document.getElementById("sortDropdown").classList.toggle("show");
           }

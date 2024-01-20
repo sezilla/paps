@@ -1,4 +1,4 @@
-const input = document.querySelector("input");
+const input = document.querySelector("$sql");
 const generatebtn = document.querySelector("#generate"); 
 const downloadbtn = document.querySelector("#download");
 

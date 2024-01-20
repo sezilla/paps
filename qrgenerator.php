@@ -1,32 +1,105 @@
+<?php
+session_start();
 
+include("db_conn.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>QR Code Generator</title>
-    <link rel="icon" type="image/x-icon" href="bxs-calendar-check.svg">
-    <link rel="stylesheet" href="sidebar.css" type="text/css" />
-    <link rel="stylesheet" href="qrgenerator.css" />
-    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
-    <!-- Boxiocns CDN Link -->
-    <link
-      href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
-      rel="stylesheet"
-    />
-    <link href="css/attendance.css" rel="stylesheet" type="text/css" >
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Request for Certificate of Enrollment</title>
+    <link rel="icon" type="image/x-icon" href="images/papsicon.png" />
+    <link href="/dist/output.css" rel="stylesheet" />
+    
   </head>
-  <body>
-  <?php 
-          include("db_conn.php");
-          
-          ?>
-  <div class="sidebar close"> 
+  <body
+    class="bg-fixed bg-no-repeat bg-cover bg-center bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#f3f4f5] via-[#e0e8ed] to-[#d0dde6]"
+  >
+    <div class="flex flex-col items-stretch pl-12 pr-12 max-md:px-5">
+  <header>
+        <nav
+          class="flex w-full items-center justify-between gap-20 mt-10 max-md:max-w-full max-md:flex-wrap"
+        >
+          <a
+            href="Student_Home.html"
+            class="flex items-stretch justify-between gap-5 my-auto max-md:max-w-full max-md:flex-wrap max-md:justify-center"
+          >
+            <img
+              loading="lazy"
+              srcset="
+                https://cdn.builder.io/api/v1/image/assets/TEMP/c10b870d-61d6-41cd-9b5e-f87b8fb9b9eb?apiKey=00d7018a335e46bbabd3ad8844351700&width=100   100w,
+                https://cdn.builder.io/api/v1/image/assets/TEMP/c10b870d-61d6-41cd-9b5e-f87b8fb9b9eb?apiKey=00d7018a335e46bbabd3ad8844351700&width=200   200w,
+                https://cdn.builder.io/api/v1/image/assets/TEMP/c10b870d-61d6-41cd-9b5e-f87b8fb9b9eb?apiKey=00d7018a335e46bbabd3ad8844351700&width=400   400w,
+                https://cdn.builder.io/api/v1/image/assets/TEMP/c10b870d-61d6-41cd-9b5e-f87b8fb9b9eb?apiKey=00d7018a335e46bbabd3ad8844351700&width=800   800w,
+                https://cdn.builder.io/api/v1/image/assets/TEMP/c10b870d-61d6-41cd-9b5e-f87b8fb9b9eb?apiKey=00d7018a335e46bbabd3ad8844351700&width=1200 1200w,
+                https://cdn.builder.io/api/v1/image/assets/TEMP/c10b870d-61d6-41cd-9b5e-f87b8fb9b9eb?apiKey=00d7018a335e46bbabd3ad8844351700&width=1600 1600w,
+                https://cdn.builder.io/api/v1/image/assets/TEMP/c10b870d-61d6-41cd-9b5e-f87b8fb9b9eb?apiKey=00d7018a335e46bbabd3ad8844351700&width=2000 2000w,
+                https://cdn.builder.io/api/v1/image/assets/TEMP/c10b870d-61d6-41cd-9b5e-f87b8fb9b9eb?apiKey=00d7018a335e46bbabd3ad8844351700&
+              "
+              class="aspect-[4.09] object-contain object-center w-[143px] overflow-hidden shrink-0 max-w-full"
+              alt="Logo"
+            />
+            <div
+              class="justify-center self-start flex gap-10 my-auto max-md:max-w-full max-md:flex-wrap max-md:justify-center"
+            >
+              <a
+                href="Student_Home.html"
+                class="text-stone-900 text-center text-base font-medium leading-5"
+                >Home</a
+              >
+              <a
+                href="formrequest.html"
+                class="text-black text-center text-base font-extrabold leading-5"
+                >Form Request</a
+              >
+              <a
+                href="Students_Programs.html"
+                class="text-black text-center text-base font-medium leading-5"
+                >Programs</a
+              >
+              <a
+                href="Students_About.html"
+                class="text-black text-center text-base font-medium leading-5 whitespace-nowrap"
+                >About</a
+              >
+            </div>
+          </a>
+         
+        </nav>
+      </header>
+      <h1
+        class="text-orange-950 text-4xl font-extrabold leading-[54px] w-[1012px] ml-4 mt-20 max-md:max-w-full max-md:mt-10"
+      >
+        Request Successfully sent
+      </h1>
+      <div class="pr-12 pl-4">
+      <p
+        class="text-orange-950 text-lg leading-8 w-full ml-4 mr-5 mt-6 max-md:max-w-full"
+      >
+        <span>Please ensure all required details are accurately provided before submitting your request to the registrar.
+        </span></br>
+        <span>Once done, entrust the process to us, and your 
+        <span class="font-bold">Certificate of Grades</span>
+        <span>will be prepared within
+        <span class="font-bold">7 working days</span>
+        <span>.</span>
+      </p>
+    </div>
     <div class="container">
-    <?echo "Enter Student ID".$_POST['student_num']?>
-      
+      <p>Here is your control number, pls generate the mf qr code son of a bij. its not a suggestion, its a command.</p>
+     
+                 <?php
+                  $sql="SELECT ctrl_num FROM request ORDER BY ctrl_num DESC LIMIT 1;";
+                  $result=mysqli_query($conn,$sql);
+                  $theone=mysqli_fetch_assoc($result)
+                  ?>
+                  
+                  <input type="text" value="<?php echo $theone['ctrl_num'];?>"  id="qrText" readonly>
+    
 
-      <div id="imgBox"> 
+      <div id="imgBox">
         <img src="" id="qrImage" />
       </div>
       <button onclick="generateQR()">Generate QR Code</button>

@@ -187,7 +187,7 @@ window.location.href="formrequest.html";
                         type="text"
                         id="program"
                         name="program"
-                        placeholder="Program"
+                        placeholder="e.g. BS Computer Science"
                         class="bg-[#eff0f2] mt-3 py-3 px-5 w-full border border-gray-300 p-3 focus:outline-none focus:ring-[#ab644d] focus:ring-1 rounded-[50px] max-md:pl-1"
                         onkeyup="onkeyUp(event)"
                         autocomplete="off"
@@ -213,7 +213,7 @@ window.location.href="formrequest.html";
                       id="acad_yr"
                       name="acad_yr"
                       class="bg-[#eff0f2] mt-3 py-3 px-5 w-full border border-gray-300 p-3 focus:outline-none focus:ring-[#ab644d] focus:ring-1 rounded-[50px] max-md:pl-1"
-                      placeholder="Academic Year"
+                      placeholder="e.g. 2024-2025"
                       required
                     />
                   </div>
@@ -245,7 +245,7 @@ window.location.href="formrequest.html";
                       id="fname"
                       name="fname"
                       class="bg-[#eff0f2] mt-3 py-3 px-5 w-full border border-gray-300 p-3 focus:outline-none focus:ring-[#ab644d] focus:ring-1 rounded-[50px] max-md:pl-1"
-                      placeholder="First Name"
+                      placeholder="e.g. Juan"
                       required
                     />
                   </div>
@@ -264,7 +264,7 @@ window.location.href="formrequest.html";
                       id="mname"
                       name="mname"
                       class="bg-[#eff0f2] mt-3 py-3 px-5 w-full border border-gray-300 p-3 focus:outline-none focus:ring-[#ab644d] focus:ring-1 rounded-[50px] max-md:pl-1"
-                      placeholder="Middle Name"
+                      placeholder="e.g. Gregorio"
                       required
                     />
                   </div>
@@ -284,7 +284,7 @@ window.location.href="formrequest.html";
                       type="text"
                       id="lname"
                       name="lname"
-                      placeholder="Last Name"
+                      placeholder="e.g. Dela Cruz"
                       required
                       class="bg-[#eff0f2] mt-3 py-3 px-5 w-full border border-gray-300 p-3 focus:outline-none focus:ring-[#ab644d] focus:ring-1 rounded-[50px] max-md:pl-1"
                     />
@@ -296,110 +296,154 @@ window.location.href="formrequest.html";
 
 <!--2nd Line-->
               
-
+            
+              <!--Sex-->
+            <div class="justify-between mt-10 max-md:max-w-full">
               <div
-                class="gap-5 flex max-md:flex-col max-md:items-stretch mt-10 max-md:gap-0"
+                class="gap-5 flex max-md:flex-col max-md:items-stretch max-md:gap-0"
               >
                 <div
                   class="flex flex-col items-stretch w-[33%] max-md:w-full max-md:ml-0"
                 >
-                  <div class="items-stretch flex grow flex-col">
+                  <div class="items-stretch flex grow flex-col max-md:mt-10">
                     <label
-                      for="fname"
+                      for="sex"
                       class="text-[#401b1b] text-base font-bold leading-6 whitespace-nowrap"
                       >Sex</label
                     >
 
-                    <input
-                      id="sex"
-                      name="sex"
-                      class="bg-[#eff0f2] mt-3 py-3 px-5 w-full border border-gray-300 p-3 focus:outline-none focus:ring-[#ab644d] focus:ring-1 rounded-[50px] max-md:pl-1"
-                      placeholder="Sex"
-                      required
-                    />
+                    <div
+                      class="w-88 relative"
+                    >
+                      <select
+                        type="text"
+                        id="sex"
+                        name="sex"
+                        placeholder="Sex"
+                        class="bg-[#eff0f2] mt-3 py-3 px-5 w-full border border-gray-300 p-3 focus:outline-none focus:ring-[#ab644d] focus:ring-1 rounded-[50px] max-md:pl-1"                        autocomplete="off"
+                        >
+                        <option value=" "> </option>
+                        <option value="1">Male</option>
+                        <option value="1">Female</option>
+                        <option value="1">Rather not say</option>
+                      </select>
+
+                      <div
+                        id="dropdown_sex"
+                        class="w-full h-60 border border-gray-300 rounded-md bg-[#eff0f2] absolute overflow-y-auto hidden"
+                      ></div>
+                    </div>
                   </div>
                 </div>
+                <!--end--Sex-->
 
+                <!--Date of Birth-->
                 <div
                   class="flex flex-col items-stretch w-[34%] ml-5 max-md:w-full max-md:ml-0"
                 >
                   <div class="items-stretch flex grow flex-col max-md:mt-10">
                     <label
-                      for="mname"
+                      for="dob"
                       class="text-[#401b1b] text-base font-bold leading-6 whitespace-nowrap"
-                      >Middle Name</label
+                      >Date of Birth</label
                     >
                     <input
-                      id="mname"
-                      name="mname"
+                      type="date"
+                      id="dob"
+                      name="dob"
                       class="bg-[#eff0f2] mt-3 py-3 px-5 w-full border border-gray-300 p-3 focus:outline-none focus:ring-[#ab644d] focus:ring-1 rounded-[50px] max-md:pl-1"
-                      placeholder="Middle Name"
+                      placeholder="Date of Birth"
                       required
                     />
                   </div>
                 </div>
+                <!--End--Date of Birth-->
 
+                <!--Religion-->
                 <div
                   class="flex flex-col items-stretch w-[33%] ml-5 max-md:w-full max-md:ml-0"
                 >
-                  <div class="items-stretch flex grow flex-col max-md:mt-10">
-                    <label
-                      for="lname"
-                      class="text-[#401b1b] text-base font-bold leading-6 whitespace-nowrap"
-                      >Last Name</label
-                    >
+                    <div class="items-stretch flex grow flex-col max-md:mt-10">
+                      <label
+                        for="religion"
+                        class="text-[#401b1b] text-base font-bold leading-6 whitespace-nowrap"
+                        >Religion</label
+                      >
 
-                    <input
-                      type="text"
-                      id="lname"
-                      name="lname"
-                      placeholder="Last Name"
-                      required
-                      class="bg-[#eff0f2] mt-3 py-3 px-5 w-full border border-gray-300 p-3 focus:outline-none focus:ring-[#ab644d] focus:ring-1 rounded-[50px] max-md:pl-1"
-                    />
+                      <input
+                        type="text"
+                        id="religion"
+                        name="religion"
+                        placeholder="e.g. Roman Catholic"
+                        required
+                        class="bg-[#eff0f2] mt-3 py-3 px-5 w-full border border-gray-300 p-3 focus:outline-none focus:ring-[#ab644d] focus:ring-1 rounded-[50px] max-md:pl-1"
+                      />
+                    </div>
                   </div>
                 </div>
+                <!--End-Religion-->
                 
-              </div>
+                
+              </div><!--div-end-line-->
 
 <!--3rd Line-->
+              <!--Civil Status-->
+            <div class="justify-between mt-10 max-md:max-w-full">
               <div
-                class="gap-5 flex max-md:flex-col max-md:items-stretch mt-10 max-md:gap-0"
+                class="gap-5 flex max-md:flex-col max-md:items-stretch max-md:gap-0"
               >
                 <div
                   class="flex flex-col items-stretch w-[33%] max-md:w-full max-md:ml-0"
                 >
-                  <div class="items-stretch flex grow flex-col">
+                  <div class="items-stretch flex grow flex-col max-md:mt-10">
                     <label
-                      for="fname"
+                      for="sex"
                       class="text-[#401b1b] text-base font-bold leading-6 whitespace-nowrap"
-                      >First Name</label
+                      >Civil Status</label
                     >
 
-                    <input
-                      id="fname"
-                      name="fname"
-                      class="bg-[#eff0f2] mt-3 py-3 px-5 w-full border border-gray-300 p-3 focus:outline-none focus:ring-[#ab644d] focus:ring-1 rounded-[50px] max-md:pl-1"
-                      placeholder="First Name"
-                      required
-                    />
+                    <div
+                      class="w-88 relative"
+                    >
+                      <select
+                        type="text"
+                        id="sex"
+                        name="sex"
+                        placeholder="Sex"
+                        class="bg-[#eff0f2] mt-3 py-3 px-5 w-full border border-gray-300 p-3 focus:outline-none focus:ring-[#ab644d] focus:ring-1 rounded-[50px] max-md:pl-1"                        autocomplete="off"
+                        >
+                        <option value=" "> </option>
+                        <option value="1">Single</option>
+                        <option value="1">Married</option>
+                        <option value="1">Widowed</option>
+                        <option value="1">Divorced</option>
+                      </select>
+
+                      <div
+                        id="dropdown_sex"
+                        class="w-full h-60 border border-gray-300 rounded-md bg-[#eff0f2] absolute overflow-y-auto hidden"
+                      ></div>
+                    </div>
                   </div>
                 </div>
+                <!--end--Sex-->
+
 
                 <div
                   class="flex flex-col items-stretch w-[34%] ml-5 max-md:w-full max-md:ml-0"
                 >
                   <div class="items-stretch flex grow flex-col max-md:mt-10">
                     <label
-                      for="mname"
+                      for="number"
                       class="text-[#401b1b] text-base font-bold leading-6 whitespace-nowrap"
-                      >Middle Name</label
+                      >Contact Number</label
                     >
                     <input
-                      id="mname"
-                      name="mname"
+                      id="num"
+                      name="num"
+
                       class="bg-[#eff0f2] mt-3 py-3 px-5 w-full border border-gray-300 p-3 focus:outline-none focus:ring-[#ab644d] focus:ring-1 rounded-[50px] max-md:pl-1"
-                      placeholder="Middle Name"
+                      placeholder="+63 912 345 6789"
                       required
                     />
                   </div>
@@ -410,16 +454,16 @@ window.location.href="formrequest.html";
                 >
                   <div class="items-stretch flex grow flex-col max-md:mt-10">
                     <label
-                      for="lname"
+                      for="lemail"
                       class="text-[#401b1b] text-base font-bold leading-6 whitespace-nowrap"
-                      >Last Name</label
+                      >Email Address</label
                     >
 
                     <input
                       type="text"
-                      id="lname"
-                      name="lname"
-                      placeholder="Last Name"
+                      id="email"
+                      name="email"
+                      placeholder="example@gmail.com"
                       required
                       class="bg-[#eff0f2] mt-3 py-3 px-5 w-full border border-gray-300 p-3 focus:outline-none focus:ring-[#ab644d] focus:ring-1 rounded-[50px] max-md:pl-1"
                     />
@@ -429,78 +473,550 @@ window.location.href="formrequest.html";
               </div>
 <!--END OF PERSONAL INFORMATION-->
 
+
+<!--PERMANENT ADDRESS-->
+              <div
+                class="text-black text-lg font-extrabold leading-6 whitespace-nowrap mt-10 mb-3 max-md:max-w-full"
+              >
+                Permanent Address
+              </div>
+<!--1st Line-->
+              <div
+                class="gap-5 flex max-md:flex-col max-md:items-stretch max-md:gap-0"
+              >
+                <div
+                  class="flex flex-col items-stretch w-[33%] max-md:w-full max-md:ml-0"
+                >
+                  <div class="items-stretch flex grow flex-col">
+                    <label
+                      for="fname"
+                      class="text-[#401b1b] text-base font-bold leading-6 whitespace-nowrap"
+                      >Street</label
+                    >
+
+                    <input
+                      id="street"
+                      name="street"
+                      class="bg-[#eff0f2] mt-3 py-3 px-5 w-full border border-gray-300 p-3 focus:outline-none focus:ring-[#ab644d] focus:ring-1 rounded-[50px] max-md:pl-1"
+                      placeholder="e.g. Block 123 Lot 11"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div
+                  class="flex flex-col items-stretch w-[34%] ml-5 max-md:w-full max-md:ml-0"
+                >
+                  <div class="items-stretch flex grow flex-col max-md:mt-10">
+                    <label
+                      for="Country"
+                      class="text-[#401b1b] text-base font-bold leading-6 whitespace-nowrap"
+                      >Country</label
+                    >
+                    <input
+                      id="count"
+                      name="count"
+                      class="bg-[#eff0f2] mt-3 py-3 px-5 w-full border border-gray-300 p-3 focus:outline-none focus:ring-[#ab644d] focus:ring-1 rounded-[50px] max-md:pl-1"
+                      placeholder="e.g. Philippines"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div
+                  class="flex flex-col items-stretch w-[33%] ml-5 max-md:w-full max-md:ml-0"
+                >
+                  <div class="items-stretch flex grow flex-col max-md:mt-10">
+                    <label
+                      for="province"
+                      class="text-[#401b1b] text-base font-bold leading-6 whitespace-nowrap"
+                      >Province</label
+                    >
+
+                    <input
+                      type="text"
+                      id="prov"
+                      name="prov"
+                      placeholder="e.g. Cavite"
+                      required
+                      class="bg-[#eff0f2] mt-3 py-3 px-5 w-full border border-gray-300 p-3 focus:outline-none focus:ring-[#ab644d] focus:ring-1 rounded-[50px] max-md:pl-1"
+                    />
+                  </div>
+                </div>
+
+              </div>
+
+<!--2nd Line-->
+              <div
+                class="gap-5 flex max-md:flex-col mt-10 max-md:items-stretch max-md:gap-0"
+              >
+                <div
+                  class="flex flex-col items-stretch w-[33%] max-md:w-full max-md:ml-0"
+                >
+                  <div class="items-stretch flex grow flex-col">
+                    <label
+                      for="fname"
+                      class="text-[#401b1b] text-base font-bold leading-6 whitespace-nowrap"
+                      >Municipality</label
+                    >
+
+                    <input
+                      id="muni"
+                      name="muni"
+                      class="bg-[#eff0f2] mt-3 py-3 px-5 w-full border border-gray-300 p-3 focus:outline-none focus:ring-[#ab644d] focus:ring-1 rounded-[50px] max-md:pl-1"
+                      placeholder="e.g. Bacoor"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div
+                  class="flex flex-col items-stretch w-[34%] ml-5 max-md:w-full max-md:ml-0"
+                >
+                  <div class="items-stretch flex grow flex-col max-md:mt-10">
+                    <label
+                      for="brgy"
+                      class="text-[#401b1b] text-base font-bold leading-6 whitespace-nowrap"
+                      >Barangay</label
+                    >
+                    <input
+                      id="brgy"
+                      name="brgy"
+                      class="bg-[#eff0f2] mt-3 py-3 px-5 w-full border border-gray-300 p-3 focus:outline-none focus:ring-[#ab644d] focus:ring-1 rounded-[50px] max-md:pl-1"
+                      placeholder="e.g. Molino"   
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div
+                  class="flex flex-col items-stretch w-[33%] ml-5 max-md:w-full max-md:ml-0"
+                >
+                  <div class="items-stretch flex grow flex-col max-md:mt-10">
+                    <label
+                      for="zip"
+                      class="text-[#401b1b] text-base font-bold leading-6 whitespace-nowrap"
+                      >Zip Code</label
+                    >
+
+                    <input
+                      type="text"
+                      id="zip"
+                      name="zip"
+                      placeholder="e.g. 4114"
+                      required
+                      class="bg-[#eff0f2] mt-3 py-3 px-5 w-full border border-gray-300 p-3 focus:outline-none focus:ring-[#ab644d] focus:ring-1 rounded-[50px] max-md:pl-1"
+                    />
+                  </div>
+                </div>
+
+              </div>
+
+<!--END OF PERMANENT ADDRESS-->
+
+<!--EDUCATIONAL BACKGROUND-->
+              <div
+                class="text-black text-lg font-extrabold leading-6 whitespace-nowrap mt-10 mb-3 max-md:max-w-full"
+              >
+                Educational Background
+              </div>
+
+              <div
+                class="text-[#401b1b] mt-10 mb-5 text-base font-extrabold leading-6 whitespace-nowrap"
+              >
+                Elementary
+              </div>
+<!--1st Line-->
+              <div
+                class="gap-5 flex max-md:flex-col max-md:items-stretch max-md:gap-0"
+              >
+                <div
+                  class="flex flex-col items-stretch w-[33%] max-md:w-full max-md:ml-0"
+                >
+                  <div class="items-stretch flex grow flex-col">
+                    <label
+                      for="nameschool"
+                      class="text-[#401b1b] text-base font-bold leading-6 whitespace-nowrap"
+                      >Name of School</label
+                    >
+
+                    <input
+                      id="elem"
+                      name="elem"
+                      class="bg-[#eff0f2] mt-3 py-3 px-5 w-full border border-gray-300 p-3 focus:outline-none focus:ring-[#ab644d] focus:ring-1 rounded-[50px] max-md:pl-1"
+                      placeholder="e.g. MAMS Academy"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div
+                  class="flex flex-col items-stretch w-[34%] ml-5 max-md:w-full max-md:ml-0"
+                >
+                  <div class="items-stretch flex grow flex-col max-md:mt-10">
+                    <label
+                      for="add"
+                      class="text-[#401b1b] text-base font-bold leading-6 whitespace-nowrap"
+                      >Address</label
+                    >
+                    <input
+                      id="addelem"
+                      name="addelem"
+                      class="bg-[#eff0f2] mt-3 py-3 px-5 w-full border border-gray-300 p-3 focus:outline-none focus:ring-[#ab644d] focus:ring-1 rounded-[50px] max-md:pl-1"
+                      placeholder="e.g. Bacoor, Cavite"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div
+                  class="flex flex-col items-stretch w-[33%] ml-5 max-md:w-full max-md:ml-0"
+                >
+                  <div class="items-stretch flex grow flex-col max-md:mt-10">
+                    <label
+                      for="yrgrad"
+                      class="text-[#401b1b] text-base font-bold leading-6 whitespace-nowrap"
+                      >Year Graduated</label
+                    >
+
+                    <input
+                      type="text"
+                      id="yrgrad"
+                      name="yrgrad"
+                      placeholder="e.g. 2015"
+                      required
+                      class="bg-[#eff0f2] mt-3 py-3 px-5 w-full border border-gray-300 p-3 focus:outline-none focus:ring-[#ab644d] focus:ring-1 rounded-[50px] max-md:pl-1"
+                    />
+                  </div>
+                </div>
+
+              </div>
+
+              <div
+                class="text-[#401b1b] mt-10 mb-5 text-base font-extrabold leading-6 whitespace-nowrap"
+              >
+                Junior High School
+              </div>
+
+<!--2nd Line-->
+              <div
+                class="gap-5 flex max-md:flex-col max-md:items-stretch max-md:gap-0"
+              >
+                <div
+                  class="flex flex-col items-stretch w-[33%] max-md:w-full max-md:ml-0"
+                >
+                  <div class="items-stretch flex grow flex-col">
+                    <label
+                      for="nameschool"
+                      class="text-[#401b1b] text-base font-bold leading-6 whitespace-nowrap"
+                      >Name of School</label
+                    >
+
+                    <input
+                      id="elem"
+                      name="elem"
+                      class="bg-[#eff0f2] mt-3 py-3 px-5 w-full border border-gray-300 p-3 focus:outline-none focus:ring-[#ab644d] focus:ring-1 rounded-[50px] max-md:pl-1"
+                      placeholder="e.g. MAMS Academy"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div
+                  class="flex flex-col items-stretch w-[34%] ml-5 max-md:w-full max-md:ml-0"
+                >
+                  <div class="items-stretch flex grow flex-col max-md:mt-10">
+                    <label
+                      for="add"
+                      class="text-[#401b1b] text-base font-bold leading-6 whitespace-nowrap"
+                      >Address</label
+                    >
+                    <input
+                      id="addelem"
+                      name="addelem"
+                      class="bg-[#eff0f2] mt-3 py-3 px-5 w-full border border-gray-300 p-3 focus:outline-none focus:ring-[#ab644d] focus:ring-1 rounded-[50px] max-md:pl-1"
+                      placeholder="e.g. Bacoor, Cavite"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div
+                  class="flex flex-col items-stretch w-[33%] ml-5 max-md:w-full max-md:ml-0"
+                >
+                  <div class="items-stretch flex grow flex-col max-md:mt-10">
+                    <label
+                      for="yrgrad"
+                      class="text-[#401b1b] text-base font-bold leading-6 whitespace-nowrap"
+                      >Year Graduated</label
+                    >
+
+                    <input
+                      type="text"
+                      id="yrgrad"
+                      name="yrgrad"
+                      placeholder="e.g. 2019"
+                      required
+                      class="bg-[#eff0f2] mt-3 py-3 px-5 w-full border border-gray-300 p-3 focus:outline-none focus:ring-[#ab644d] focus:ring-1 rounded-[50px] max-md:pl-1"
+                    />
+                  </div>
+                </div>
+
+              </div>
+
+              <div
+                class="text-[#401b1b] mt-10 mb-5 text-base font-extrabold leading-6 whitespace-nowrap"
+              >
+                Senior High School
+              </div>
+
+<!--3rd Line-->
+              <div
+                class="gap-5 flex max-md:flex-col max-md:items-stretch max-md:gap-0"
+              >
+                <div
+                  class="flex flex-col items-stretch w-[33%] max-md:w-full max-md:ml-0"
+                >
+                  <div class="items-stretch flex grow flex-col">
+                    <label
+                      for="nameschool"
+                      class="text-[#401b1b] text-base font-bold leading-6 whitespace-nowrap"
+                      >Name of School</label
+                    >
+
+                    <input
+                      id="elem"
+                      name="elem"
+                      class="bg-[#eff0f2] mt-3 py-3 px-5 w-full border border-gray-300 p-3 focus:outline-none focus:ring-[#ab644d] focus:ring-1 rounded-[50px] max-md:pl-1"
+                      placeholder="e.g. MAMS Academy"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div
+                  class="flex flex-col items-stretch w-[34%] ml-5 max-md:w-full max-md:ml-0"
+                >
+                  <div class="items-stretch flex grow flex-col max-md:mt-10">
+                    <label
+                      for="add"
+                      class="text-[#401b1b] text-base font-bold leading-6 whitespace-nowrap"
+                      >Address</label
+                    >
+                    <input
+                      id="addelem"
+                      name="addelem"
+                      class="bg-[#eff0f2] mt-3 py-3 px-5 w-full border border-gray-300 p-3 focus:outline-none focus:ring-[#ab644d] focus:ring-1 rounded-[50px] max-md:pl-1"
+                      placeholder="e.g. Bacoor, Cavite"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div
+                  class="flex flex-col items-stretch w-[33%] ml-5 max-md:w-full max-md:ml-0"
+                >
+                  <div class="items-stretch flex grow flex-col max-md:mt-10">
+                    <label
+                      for="yrgrad"
+                      class="text-[#401b1b] text-base font-bold leading-6 whitespace-nowrap"
+                      >Year Graduated</label
+                    >
+
+                    <input
+                      type="text"
+                      id="yrgrad"
+                      name="yrgrad"
+                      placeholder="e.g. 2020"
+                      required
+                      class="bg-[#eff0f2] mt-3 py-3 px-5 w-full border border-gray-300 p-3 focus:outline-none focus:ring-[#ab644d] focus:ring-1 rounded-[50px] max-md:pl-1"
+                    />
+                  </div>
+                </div>
+
+              </div>
+
+
+              <div
+                class="text-[#401b1b] mt-10 mb-5 text-base font-extrabold leading-6 whitespace-nowrap"
+              >
+                Vocational (If Applicable)
+              </div>
+
+<!--3rd Line-->
+              <div
+                class="gap-5 flex max-md:flex-col max-md:items-stretch max-md:gap-0"
+              >
+                <div
+                  class="flex flex-col items-stretch w-[33%] max-md:w-full max-md:ml-0"
+                >
+                  <div class="items-stretch flex grow flex-col">
+                    <label
+                      for="nameschool"
+                      class="text-[#401b1b] text-base font-bold leading-6 whitespace-nowrap"
+                      >Name of School</label
+                    >
+
+                    <input
+                      id="elem"
+                      name="elem"
+                      class="bg-[#eff0f2] mt-3 py-3 px-5 w-full border border-gray-300 p-3 focus:outline-none focus:ring-[#ab644d] focus:ring-1 rounded-[50px] max-md:pl-1"
+                      placeholder="e.g. MAMS Academy"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div
+                  class="flex flex-col items-stretch w-[34%] ml-5 max-md:w-full max-md:ml-0"
+                >
+                  <div class="items-stretch flex grow flex-col max-md:mt-10">
+                    <label
+                      for="add"
+                      class="text-[#401b1b] text-base font-bold leading-6 whitespace-nowrap"
+                      >Address</label
+                    >
+                    <input
+                      id="addelem"
+                      name="addelem"
+                      class="bg-[#eff0f2] mt-3 py-3 px-5 w-full border border-gray-300 p-3 focus:outline-none focus:ring-[#ab644d] focus:ring-1 rounded-[50px] max-md:pl-1"
+                      placeholder="e.g. Bacoor, Cavite"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div
+                  class="flex flex-col items-stretch w-[33%] ml-5 max-md:w-full max-md:ml-0"
+                >
+                  <div class="items-stretch flex grow flex-col max-md:mt-10">
+                    <label
+                      for="yrgrad"
+                      class="text-[#401b1b] text-base font-bold leading-6 whitespace-nowrap"
+                      >Year Graduated</label
+                    >
+
+                    <input
+                      type="text"
+                      id="yrgrad"
+                      name="yrgrad"
+                      placeholder="e.g. 2019"
+                      required
+                      class="bg-[#eff0f2] mt-3 py-3 px-5 w-full border border-gray-300 p-3 focus:outline-none focus:ring-[#ab644d] focus:ring-1 rounded-[50px] max-md:pl-1"
+                    />
+                  </div>
+                </div>
+
+              </div>
+
+              <div
+                class="text-[#401b1b] mt-10 mb-5 text-base font-extrabold leading-6 whitespace-nowrap"
+              >
+                College (For transferees)
+              </div>
+
+<!--4th Line-->
+              <div
+                class="gap-5 flex max-md:flex-col max-md:items-stretch max-md:gap-0"
+              >
+                <div
+                  class="flex flex-col items-stretch w-[33%] max-md:w-full max-md:ml-0"
+                >
+                  <div class="items-stretch flex grow flex-col">
+                    <label
+                      for="nameschool"
+                      class="text-[#401b1b] text-base font-bold leading-6 whitespace-nowrap"
+                      >Name of School</label
+                    >
+
+                    <input
+                      id="elem"
+                      name="elem"
+                      class="bg-[#eff0f2] mt-3 py-3 px-5 w-full border border-gray-300 p-3 focus:outline-none focus:ring-[#ab644d] focus:ring-1 rounded-[50px] max-md:pl-1"
+                      placeholder="e.g. MAMS Academy"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div
+                  class="flex flex-col items-stretch w-[34%] ml-5 max-md:w-full max-md:ml-0"
+                >
+                  <div class="items-stretch flex grow flex-col max-md:mt-10">
+                    <label
+                      for="add"
+                      class="text-[#401b1b] text-base font-bold leading-6 whitespace-nowrap"
+                      >Address</label
+                    >
+                    <input
+                      id="addelem"
+                      name="addelem"
+                      class="bg-[#eff0f2] mt-3 py-3 px-5 w-full border border-gray-300 p-3 focus:outline-none focus:ring-[#ab644d] focus:ring-1 rounded-[50px] max-md:pl-1"
+                      placeholder="e.g. Bacoor, Cavite"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div
+                  class="flex flex-col items-stretch w-[33%] ml-5 max-md:w-full max-md:ml-0"
+                >
+                  <div class="items-stretch flex grow flex-col max-md:mt-10">
+                    <label
+                      for="yrgrad"
+                      class="text-[#401b1b] text-base font-bold leading-6 whitespace-nowrap"
+                      >Year Graduated</label
+                    >
+
+                    <input
+                      type="text"
+                      id="yrgrad"
+                      name="yrgrad"
+                      placeholder="e.g. 2023"
+                      required
+                      class="bg-[#eff0f2] mt-3 py-3 px-5 w-full border border-gray-300 p-3 focus:outline-none focus:ring-[#ab644d] focus:ring-1 rounded-[50px] max-md:pl-1"
+                    />
+                  </div>
+                </div>
+
+              </div>
+
+
+<!--END OF PERMANENT ADDRESS-->
+
             </div>
           </div>
         </div>
       </section>
-      <section>
-        <div class="flex flex-col items-stretch px-5">
-          <div
-            class="justify-center items-stretch bg-slate-300 flex w-full flex-col -mr-5 mt-12 px-7 py-8 rounded-[30px] max-md:max-w-full max-md:mt-10 max-md:px-5"
-          >
-            <div class="items-stretch flex grow flex-col max-md:mt-10">
-              <label
-                for="purpose"
-                class="text-[#401b1b] text-base font-bold leading-6 whitespace-nowrap"
-                >Purpose</label
-              >
 
-</div>
-              <input
-                type="text"
-                name="purpose"
-                id="purpose"
-                class="bg-[#eff0f2] align-text-top mt-3 py-3 px-5 w-full border border-gray-300 p-3 focus:outline-none focus:ring-[#ab644d] focus:ring-1 rounded-[10px] max-md:pl-1"
-                placeholder="Please type your specific reason of requesting a Transcript of Records here..."
-                required
-              />
-            </div>
-            <!--
-        <div class="container">
-          <h2 class="title">
-            Purpose (State the specific reason for your request for this
-            document)
-          </h2>
-          <div class="input-container">
-            <label for="address">Please type your address here...</label>
-            <input type="text" id="address" name="address" />
-          </div>
-        </div>
-        -->
-          </div>
-          
 
-<!-- component -->
-
+      <section class="mb-20">
           <section class="mb-20">
             <div class="flex flex-col items-stretch px-16">
               <div
                 class="justify-center items-stretch  flex w-full flex-col -mr-5 px-7 mt-12 rounded-[30px] max-md:max-w-full max-md:mt-10 max-md:px-5"
               ><span class="font-extrabold ">PLEASE READ BEFORE PROCEEDING</span> <br />
-              <ul class="list-disc pl-5">
-          <li>Keep in mind that your request is subject to assessment, and approval is not guaranteed.</li>
-          <li>Be ready to make a payment at the cashier's office upon collection of this document.</li>
-          <li>Please note that the price for the document may vary depending on the number of pages.</li>
-          <li>You will receive an email notification at the provided email address to update you on the status of your request.</li>
-          <li>Please ensure that the email address you provided is active and regularly checked for updates.</li>
-        </ul>
-              name="submit" class="justify-center items-center shadow-2xl bg-[#AC644C] flex w-[244px] max-w-full gap-2 mt-20 px-12 py-7 rounded-[40px] self-center max-md:mt-10 max-md:px-5">
-               
-              <h2 class="text-gray-200 text-center text-lg font-extrabold leading-6">Submit</h2>
+              
+              <div
+                class="text-pink-900 text-justify text-lg leading-8 grow shrink basis-auto max-md:max-w-full"
+              >
+              <input type="checkbox" id="applynow" name="applynow" value="apply">
+              <label for="applynow" class="text-pink-900 text-justify text-lg leading-8 grow shrink basis-auto max-md:max-w-full">I hereby certify that all information stated above are true and correct</label><br>
+                    
+                </label>
+                <span class="">
+                  as to the best of my knowledge. I hereby give consent for my personal
+                  data included in my offer to be processed for the purpose of my
+                  admmission and enrollment accordance with
+                </span>
+              </div>
+            </div>
+              <button type="submit" name="submit" class="justify-center items-center shadow-2xl bg-[#AC644C] flex w-[244px] max-w-full gap-2 mt-20 px-12 py-7 rounded-[40px] self-center max-md:mt-10 max-md:px-5">
+                <h2 class="text-gray-200 text-center text-lg font-extrabold leading-6">Apply Now</h2>
                 <a href="https://cdn.builder.io/api/v1/image/assets/TEMP/95614cd9-381a-458f-b521-21c69ed9a189?apiKey=00d7018a335e46bbabd3ad8844351700" class="aspect-square object-contain object-center w-[18px] justify-center items-center overflow-hidden self-center shrink-0 max-w-full my-auto">
                   <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/95614cd9-381a-458f-b521-21c69ed9a189?apiKey=00d7018a335e46bbabd3ad8844351700&" alt="" />
                 </a>
               </button>
-              <!--
-              <button data-toggle="modal"
-              name="submit"
-          type="button" class="justify-center items-center shadow-2xl bg-[#AC644C] flex w-[244px] max-w-full hover:bg-[#7d4836] gap-2 mt-20 px-12 py-7 rounded-[40px] self-center max-md:mt-10 max-md:px-5">
-                <h2 class="text-gray-200 text-center text-lg font-extrabold leading-6">Submit</h2>
-                <a href="https://cdn.builder.io/api/v1/image/assets/TEMP/95614cd9-381a-458f-b521-21c69ed9a189?apiKey=00d7018a335e46bbabd3ad8844351700" class="aspect-square object-contain object-center w-[18px] justify-center items-center overflow-hidden self-center shrink-0 max-w-full my-auto">
-                  <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/95614cd9-381a-458f-b521-21c69ed9a189?apiKey=00d7018a335e46bbabd3ad8844351700&" alt="" />
-                </a>
-              </button>
--->
               </div></div>
         </section>
       </form>
@@ -508,168 +1024,8 @@ window.location.href="formrequest.html";
         </div>
       
       <!--3rd sec-->
-      
-<!--
-  
-  <div
-    role="dialog"
-    id="modal-example"
-    aria-hidden="false"
-    style="display: flex;"
-    class="modal fixed top-0 left-0 z-50 w-screen h-screen bg-black/30 flex items-center flex-col justify-center p-6 fade"
-    tabindex="-1"
-  >
-    
-    <div
-      class="absolute top-0 left-0 z-[0] w-full h-full"
-      tabindex="-1"
-    ></div>
-    
-    <article
-      class="modal-content flex flex-col relative m-0 rounded-md bg-stone-100 sm:my-16"
-      aria-labelledby="modal-title"
-      aria-describedby="modal-body"
-    >
-      
-      <header class="flex p-4 items-center justify-between">
-        <h2 class="m-0 text-xl font-medium max-w-[calc(100%_-_3rem)]">REMINDERS</h2>
-        <button
-          type="button"
-          class="flex items-center justify-center w-8 h-8 rounded-full bg-transparent transition-colors duration-300 hover:bg-black/10"
-          data-dismiss="modal"
-          aria-label="Close"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="22"
-            height="22"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="#000000"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            style="--size: 32rem"
-          >
-            <line x1="18" y1="6" x2="6" y2="18" style="--size: 32rem"></line>
-            <line x1="6" y1="6" x2="18" y2="18" style="--size: 32rem"></line>
-          </svg>
-        </button>
-      </header>
-      <main class="relative flex-[1_1_auto] p-4" style="--size: 32rem">
-        <ul class="list-disc pl-5">
-          <li>Keep in mind that your request is subject to assessment, and approval is not guaranteed.</li>
-          <li>Be ready to make a payment at the cashier's office upon collection of this document.</li>
-          <li>Please note that the price for the document may vary depending on the number of pages.</li>
-          <li>You will receive an email notification at the provided email address to update you on the status of your request.</li>
-          <li>Please ensure that the email address you provided is active and regularly checked for updates.</li>
-        </ul>
-      </main>
-      <footer class="flex flex-shrink-0 flex-wrap items-center justify-end flex-row p-4 gap-5" style="--size: 32rem">
-        <button
-          type="button"
-          class="flex items-center justify-center px-4 font-medium bg-gray-200 text-black h-9 rounded-3xl rounded md hover:bg-gray-300 transition-all duration-300"
-          data-dismiss="modal"
-        >
-          <span class="flex items-center justify-center space-x-2"
-            >Cancel</span
-          ></button
-        >
         
-        <button
-          type="submit"
-          name="submit" 
-          class="bg-[#AC644C] flex items-center justify-center px-4 font-medium text-white h-9 rounded-3xl rounded md hover:bg-[#7d4836] transition-all duration-300"
-        >
-          <span class="flex items-center justify-center space-x-2"
-            >Submit</span
-          >
     
-        </button>
-        
-      </footer>
-    </article>
-  </div>
-  
-</main>
-
-<script>
-    
-    const buttonClose = document.querySelectorAll('[data-dismiss="modal"]')
-    const modal = document.querySelector('.modal')
-    const trigger = document.querySelector('[data-toggle="modal"]')
-    
-    
-    
-    // Static backdrop
-
-    function getStaticClass (modal) {
-        modal.classList.add('astroui-modal-static')
-        document.body.style.overflow = 'hidden'
-        document.body.classList.add('astroui-modal-open')
-        setTimeout(() => {
-        modal.classList.remove('astroui-modal-static')
-        }, 100)
-    }
-
-    // Show modal
-
-    function showModal (modal) {
-        modal.style.display = 'flex'
-        setTimeout(() => {
-        modal.classList.add('show')
-        }, 100)
-        modal.setAttribute('aria-hidden', 'false')
-        document.body.style.overflow = 'hidden'
-        document.body.classList.add('astroui-modal-open')
-    }
-
-    
-    // Remove modal
-
-    function dismissModal (modal) {
-        modal.classList.remove('show')
-        setTimeout(() => {
-        modal.style.display = 'none'
-        }, 200)
-        modal.setAttribute('aria-hidden', 'true')
-        document.body.style.overflow = ''
-        document.body.classList.remove('astroui-modal-open')
-    }
-
-    dismissModal(modal)
-
-    //
-    // Function on dismissing modal by button close
-
-    const getDismiss = (buttonClose, modal) => {
-        buttonClose.addEventListener('click', () => {
-        dismissModal(modal)
-        })
-    }
-    
-    buttonClose.forEach((buttonClose) => {
-        getDismiss(buttonClose, modal)
-    })
-
-    
-    // Open modal
-
-    trigger.addEventListener('click', () => {
-        showModal(modal)
-    })
-
-    // Close modal with press escape
-
-    document.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape' && modal.classList.contains('show')) {
-        dismissModal(modal)
-        }
-        
-    })
-
-</script>
-  -->
   </body>
   <script src="programs.js"></script>
   <!--<script src="yearsec.js"></script>-->

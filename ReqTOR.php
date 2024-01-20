@@ -20,11 +20,8 @@ if(isset($_POST["submit"])){
 
 
 
-window.location.href="formrequest.html";
+window.location.href="qrgenerator.php";
 </script><?php
-
-
-
 
 
 
