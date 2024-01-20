@@ -99,7 +99,7 @@ include("db_conn.php");
                   class="flex items-stretch justify-between gap-5 -mr-5 mt-9 pr-20 max-md:max-w-full max-md:flex-wrap max-md:pr-5"
                 >
                  
-                  <button class="text-stone-100 text-center w-fit text-lg font-semibold leading-6 bg-[#ab644d] p-4 items-center rounded-xl" onclick="generateQR()">Generate QR Code</button>
+                  <button class="text-stone-100 text-center w-fit text-lg font-semibold leading-6 whitespace-nowrap bg-[#ab644d] p-4 items-center rounded-xl" onclick="generateQR()">Generate QR Code</button>
                   
                   
                 </div>
