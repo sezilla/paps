@@ -1,5 +1,22 @@
 <?php
 include("db_conn.php");
+//include("searchajax2.php");
+//$columns = array('program');
+
+// Only get the column if it exists in the above columns array, if it doesn't exist the database table will be sorted by the first item in the columns array.
+//$column = isset($_GET['column']) && in_array($_GET['column'], $columns) ? $_GET['column'] : $columns[0];
+
+// Get the sort order for the column, ascending or descending, default is ascending.
+$sort_order = isset($_GET['order']) && strtolower($_GET['order']) == 'desc' ? 'DESC' : 'ASC';
+
+if (isset($_GET['progvalue'])) {
+  $program = $_GET['progvalue'];
+}
+
+if (isset($_GET['yrsec'])) {
+  $yrsec = $_GET['yrsec'];
+}
+
 
 // Number of rows per page
 $rowsPerPage = 10;
@@ -18,8 +35,6 @@ $limitStart = ($currentPage - 1) * $rowsPerPage;
 $sql = "SELECT * FROM request LIMIT $limitStart, $rowsPerPage";
 $query = mysqli_query($conn, $sql);
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,6 +47,44 @@ $query = mysqli_query($conn, $sql);
     <link rel="stylesheet" href="table.css" type="text/css">
     <link href="/dist/output.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webrtc-adapter/3.3.3/adapter.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.min.js"></script>
+    <script type="text/javascript" src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
+    <style>
+    #dropbtn {}
+
+    #dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: rgb(229, 231, 235);
+      min-width: 110px;
+      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+    }
+
+    /* Links inside the dropdown */
+    .dropdown-content a {
+      color: rgb(67 20 7);
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+
+    /* Change color of dropdown links on hover */
+    .dropdown-content a:hover {
+      background-color: #ddd;
+    }
+
+    /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+    .show {
+      display: block;
+    }
+  </style>
 </head>
 <body class="bg-fixed bg-no-repeat bg-cover bg-center bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#f3f4f5] via-[#e0e8ed] to-[#d0dde6]">
   
@@ -133,6 +186,70 @@ $query = mysqli_query($conn, $sql);
                   </h1>
                 </div>
               </a>
+              
+
+              
+              <div class= "outer-container">
+    <div class="container">
+            <div class="row">
+                <div class="col-md-5">
+                    <video id="preview"  style="  border-radius: 10px; width: 300px; height: 300px; object-fit: cover;"></video>
+                </div>
+                <div class="col-md-6">
+                    <form action="insert1.php" method="post" class="form-horizontal">
+                        <label>Scan QR Code</label>
+                        <input type="text" name="text" id="text" readonyy="" placeholder="Scan QR Code" class="form-control">
+                    </form>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+        <script>
+            let scanner = new Instascan.Scanner({ video: document.getElementById('preview')});
+            Instascan.Camera.getCameras().then(function(cameras){
+                if (cameras.length > 0){
+                    scanner.start(cameras[0]);
+                } else {
+                    alert('No cameras found');
+                }
+            }).catch(function(e){
+                console.error(e);
+            });
+
+            scanner.addListener('scan',function(c){
+                document.getElementById('text').value=c;
+                document.forms[0].submit();
+            });
+
+            //design the size of camera
+            
+            
+            video.style.objectFit = 'cover';
+
+        function openForm() {
+            document.getElementById("myForm").style.display = "block";
+        }
+        function closeForm() {
+            document.getElementById("myForm").style.display = "none";
+        }
+
+        function burgeropen() {
+            document.getElementById("settings").style.display = "block";
+        }
+        function burgerclose() {
+            document.getElementById("settings").style.display = "none";
+        }
+
+        function gearopen() {
+            document.getElementById("mygear").style.display = "block";
+        }
+        function gearclose() {
+            document.getElementById("mygear").style.display = "none";
+        }
+
+  </script>
+
 
              
             </nav>
@@ -150,41 +267,19 @@ $query = mysqli_query($conn, $sql);
                 <h1 class="text-orange-950 text-4xl font-bold my-auto">
                   Requests
                 </h1>
-                <!--Admin Dropdown-->
-              <div class="max-w-lg">
-                <button
-                  class="text-[#424242] bg-transparent hover:bg-transparent focus:ring-4 focus:ring-transparent font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center"
-                  type="button"
-                  data-dropdown-toggle="dropdown"
-                >
-                  Account
-                </button>
-
-                <!-- Dropdown menu -->
-                <div
+                <div class="max-w-lg">
+                  <button
+                    class="text-[#424242] bg-transparent hover:bg-transparent focus:ring-4 focus:ring-transparent font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center"
+                    type="button"
+                    data-dropdown-toggle="dropdown"
+                  >
+                    Admin
+                  </button>
+                  <div
                   class="hidden bg-white text-base z-50 list-none divide-y divide-gray-100 rounded shadow my-4"
                   id="dropdown"
                 >
-                  <div class="px-4 py-3">
-                    <span class="block text-sm">Bonnie Green</span>
-                    <span
-                      class="block text-sm font-medium text-gray-900 truncate"
-                      >name@flowbite.com</span
-                    >
-                  </div>
-                  <ul class="py-1" aria-labelledby="dropdown">
-                    
-
-                    <li>
-                      <a
-                        href="index.html"
-                        class="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2"
-                        >Sign out</a
-                      >
-                    </li>
-                  </ul>
-                </div>
-              </div>
+                  
               </div>
             </header>
             
@@ -201,25 +296,94 @@ $query = mysqli_query($conn, $sql);
                 </div>
               </div>
               <div class="flex gap-3 px-5">
-                <a href="#" class="justify-center items-center w-[160px] h-[40px] flex px-5 py-2 rounded-[40px] 
+                <!--PROGRAM SECTION-->
+            <!--a href="#" class="justify-center items-center w-[160px] h-[40px] flex px-5 py-2 rounded-[40px] 
                 border-2 border-solid border-stone-500">
-                  <div class="justify-center items-center flex w-[127px] max-w-full gap-4">
-                    <div class="text-stone-500 text-lg leading-7 my-auto">Program</div>
-                    <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/e2da229c-57b4-4c99-8c1d-dc4f7553e83c?apiKey=949dc02d5acc420a9a54e7e811a36e3e&" 
-                    class="aspect-square object-contain object-center w-8 overflow-hidden self-stretch shrink-0 max-w-full" 
-                    alt="Program Icon" />
-                  </div>
-                </a>
-                <a href="#" class="justify-center items-center w-[175px] h-[40px] flex px-5 py-2 rounded-[40px] 
+              <div class="justify-center items-center flex w-[127px] max-w-full gap-4">
+                <div class="text-stone-500 text-lg leading-7 my-auto">Program</div>
+                <img loading="lazy"
+                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/e2da229c-57b4-4c99-8c1d-dc4f7553e83c?apiKey=949dc02d5acc420a9a54e7e811a36e3e&"
+                  class="aspect-square object-contain object-center w-8 overflow-hidden self-stretch shrink-0 max-w-full"
+                  alt="Program Icon" />
+              </div>
+            </a-->
+            <!--form action="request.php" method="get"-->
+            <div name="program" id="dropdown" class="items-center w-[160px] h-[40px] flex px-5 py-0.5 rounded-[40px] 
                 border-2 border-solid border-stone-500">
-                  <div class="justify-center items-center flex gap-4">
-                    <div class="text-stone-500 text-lg leading-7 my-auto">Year Level</div>
-                    <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/69ecaa31-fac5-449a-96e9-1a4b375c531a?apiKey=949dc02d5acc420a9a54e7e811a36e3e&" 
-                    class="aspect-square object-contain object-center w-8 overflow-hidden self-stretch shrink-0 max-w-full" 
-                    alt="Year Level Icon" />
-                  </div>
-                </a>
-                <a href="#" class="justify-center items-center w-[125px] h-[40px] flex px-5 py-2 rounded-[40px] 
+                <div class="justify-center items-center flex w-[127px] max-w-full gap-4">
+                <div class="text-stone-500 text-lg leading-7 my-auto">Program</div>
+                <button onclick="PROGRAMdropdown()" id="dropbtn"
+                  style="background-image: url('https://cdn.builder.io/api/v1/image/assets/TEMP/b1f4b831-70b4-4724-832d-ea63cec558e5?apiKey=949dc02d5acc420a9a54e7e811a36e3e&')"
+                  class="aspect-square object-contain object-center w-full overflow-hidden shrink-0 flex-1"></button>
+              </div>
+              <div id="programDropdown" class="dropdown-content">
+                <!--a href="request.php?column=program&value=">Link</a>
+                <a href="request.php?column=program&value=">Link</a>
+                <a href="request.php?column=program&value=">Link</a-->
+                <?php 
+          
+          $sql = "SELECT DISTINCT program from request";
+          $result = $conn-> query($sql);
+
+          if ($result-> num_rows > 0) {
+              while ($row =  $result-> fetch_assoc()){
+                //$program = $row['program'];
+                echo "<a href='requests.php?column=program&progvalue=". $row["program"]."'>". $row["program"]."</a>";
+                //echo "<option value= '". $row["program"]."'>". $row["program"]."</a>";
+              }
+          }
+          else{
+              echo "0 results";
+          }
+
+          //$conn-> close();
+          ?>
+              </div>
+        </div>
+        <!--/form-->
+
+                <!--Year Level SECTION-->
+            <!--a href="#" class="justify-center items-center w-[175px] h-[40px] flex px-5 py-2 rounded-[40px] 
+                border-2 border-solid border-stone-500">
+              <div class="justify-center items-center flex gap-4">
+                <div class="text-stone-500 text-lg leading-7 my-auto">Year Level</div>
+                <img loading="lazy"
+                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/69ecaa31-fac5-449a-96e9-1a4b375c531a?apiKey=949dc02d5acc420a9a54e7e811a36e3e&"
+                  class="aspect-square object-contain object-center w-8 overflow-hidden self-stretch shrink-0 max-w-full"
+                  alt="Year Level Icon" />
+              </div>
+            </a-->
+
+            <div id="dropdown" class="items-center w-[175px] h-[40px] flex px-5 py-0.5 rounded-[40px] 
+                border-2 border-solid border-stone-500">
+                <div class="justify-center items-center flex gap-4">
+                <div class="text-stone-500 text-lg leading-7 my-auto">Year Level</div>
+                <button onclick="YLdropdown()" id="dropbtn"
+                  style="background-image: url('https://cdn.builder.io/api/v1/image/assets/TEMP/b1f4b831-70b4-4724-832d-ea63cec558e5?apiKey=949dc02d5acc420a9a54e7e811a36e3e&')"
+                  class="aspect-square object-contain object-center w-full overflow-hidden shrink-0 flex-1"></button>
+              </div>
+              <div id="ylDropdown" class="dropdown-content">
+              <?php 
+          
+          $sql = "SELECT DISTINCT yr_sec from request";
+          $result = $conn-> query($sql);
+
+          if ($result-> num_rows > 0) {
+              while ($row =  $result-> fetch_assoc()){
+                //$program = $row['program'];
+                echo "<a href='requests.php?column=yr_sec&yrsec=". $row["yr_sec"]."'>". $row["yr_sec"]."</a>";
+                //echo "<option value= '". $row["program"]."'>". $row["program"]."</a>";
+              }
+          }
+          else{
+              echo "0 results";
+          }
+          ?>
+              </div>
+            </div>
+
+                <!--SORT SECTION-->
+            <!--a href="#" class="justify-center items-center w-[125px] h-[40px] flex px-5 py-2 rounded-[40px] 
                 border-2 border-solid border-stone-500">
                   <div class="justify-center items-center flex w-[84px] max-w-full gap-4">
                     <div class="text-stone-500 text-lg leading-7 my-auto">Sort</div>
@@ -227,11 +391,24 @@ $query = mysqli_query($conn, $sql);
                     class="aspect-square object-contain object-center w-full overflow-hidden shrink-0 flex-1" 
                     alt="Sort Icon" />
                   </div>
-                </a>
+                </a-->
+
+                <div id="dropdown" class="items-center w-[125px] h-[40px] flex px-5 py-0.5 rounded-[40px] 
+                border-2 border-solid border-stone-500">
+              <div class="justify-center items-center flex w-[84px] max-w-full gap-4">
+                <div class="text-stone-500 text-lg leading-7 my-auto">Sort</div>
+                <button onclick="SORTdropdown()" id="dropbtn"
+                  style="background-image: url('https://cdn.builder.io/api/v1/image/assets/TEMP/b1f4b831-70b4-4724-832d-ea63cec558e5?apiKey=949dc02d5acc420a9a54e7e811a36e3e&')"
+                  class="aspect-square object-contain object-center w-full overflow-hidden shrink-0 flex-1"></button>
               </div>
+              <div id="sortDropdown" class="dropdown-content">
+                <a href="requests.php?column=reqtype&order=asc">Ascending</a>
+                <a href="requests.php?column=reqtype&order=desc">Descending</a>
+                <a href="requests.php">Default</a>
+              </div>  
             </div>
-
-
+        </div>
+        </div>
             <section
               class="shadow-lg bg-[#eeefea] flex flex-col mt-10 mb-20 rounded-3xl max-md:max-w-full max-md:mt-10"
             >
@@ -246,19 +423,80 @@ $query = mysqli_query($conn, $sql);
                 <th class="text-orange-950 font-semibold leading-6">Name</th>
                 <th class="text-orange-950 font-semibold leading-6">Student No.</th>
                 <th class="text-orange-950 font-semibold leading-6">Control No.</th>
-                <th class="text-orange-950 font-semibold leading-6">Date of Birth</th>
+                <th class="text-orange-950 font-semibold leading-6">Year Level</th>
                 <th class="text-orange-950 font-semibold leading-6">Program</th>
                 <th class="text-orange-950 font-semibold leading-6">Form Type</th>
                 <th class="text-orange-950 font-semibold leading-6">Action</th>
                 </tr>
-<!--SHOWDATA-->
-                <tbody id="showdata">
-                  <?php while ($row = mysqli_fetch_assoc($query)) { ?>
+          <!--SHOWDATA-->
+          <tbody id="showdata">
+          <!--?php 
+          include("db_conn.php");
+          
+          if (isset($_GET['order'])){
+            $sql = "SELECT fullname, student_num, ctrl_num, yr_sec, program, reqtype from request ORDER BY reqtype $sort_order";
+          }
+          else if (isset($_GET['progvalue'])){
+            $sql = "SELECT fullname, student_num, ctrl_num, yr_sec, program, reqtype from request WHERE program = '$program'";
+          }
+          else if (isset($_GET['order']) && isset($_GET['progvalue'])) {
+            $sql = "SELECT fullname, student_num, ctrl_num, yr_sec, program, reqtype from request WHERE program = '$program' ORDER BY reqtype $sort_order";
+          }
+          else {
+            $sql = "SELECT fullname, student_num, ctrl_num, yr_sec, program, reqtype from request";
+          }
+          
+          
+          $result = $conn-> query($sql);
+
+          if ($result-> num_rows > 0) {
+              while ($row =  $result-> fetch_assoc()){
+                  echo "<tr>
+                  <td>". $row["fullname"]."</td>
+                  <td>". $row["student_num"]."</td>
+                  <td>". $row["ctrl_num"]."</td>
+                  <td>". $row["yr_sec"]."</td>
+                  <td>". $row["program"]."</td>
+                  <td>". $row["reqtype"]."</td>
+                  <td>
+                  <button class='bg-stone-500 text-white text-sm leading-5 font-medium rounded-3xl px-4 py-2.5 mr-5'>View</button>
+                        </td>
+                  </tr>";
+              }
+              echo "</table>";
+          }
+          else{
+              echo "0 results";
+          }
+
+          //$conn-> close();
+          ?-->
+          <?php 
+          if (isset($_GET['order'])){
+            $sql = "SELECT fullname, student_num, ctrl_num, yr_sec, program, reqtype from request ORDER BY reqtype $sort_order LIMIT $limitStart, $rowsPerPage";
+          }
+          else if (isset($_GET['progvalue'])){
+            $sql = "SELECT fullname, student_num, ctrl_num, yr_sec, program, reqtype from request WHERE program = '$program' LIMIT $limitStart, $rowsPerPage";
+          }
+          else if (isset($_GET['yrsec'])){
+            $sql = "SELECT fullname, student_num, ctrl_num, yr_sec, program, reqtype from request WHERE yr_sec = '$yrsec' LIMIT $limitStart, $rowsPerPage";
+          }
+          else if (isset($_GET['order']) && isset($_GET['progvalue'])) {
+            $sql = "SELECT fullname, student_num, ctrl_num, yr_sec, program, reqtype from request WHERE program = '$program' ORDER BY reqtype $sort_order LIMIT $limitStart, $rowsPerPage";
+          }
+          else {
+            $sql = "SELECT fullname, student_num, ctrl_num, yr_sec, program, reqtype from request LIMIT $limitStart, $rowsPerPage";
+          }
+          
+          //$sql = "SELECT fullname, student_num, ctrl_num, yr_sec, program, reqtype from request";
+          
+          $result = $conn-> query($sql);   
+          while ($row = mysqli_fetch_assoc($result)) { ?>
                     <tr>
             <td><?php echo $row["fullname"]; ?></td>
             <td><?php echo $row["student_num"]; ?></td>
             <td><?php echo $row["ctrl_num"]; ?></td>
-            <td><?php echo $row["dob"]; ?></td>
+            <td><?php echo $row["yr_sec"]; ?></td>
             <td><?php echo $row["program"]; ?></td>
             <td><?php echo $row["reqtype"]; ?></td>
             <td>
@@ -266,22 +504,53 @@ $query = mysqli_query($conn, $sql);
             </td>
         </tr>
     <?php } ?>
-            </tbody>
-        </div>
+          </tbody>
+          </div>
         </table>
-
-        
-
     </section>
     
 <!--PREVIOUS & NEXT PAGE BUTTON-->
-    <div class="flex justify-center mt-4 mb-4">
+<div class="flex justify-center mt-4 mb-4">
     <?php
-    $totalRows = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM request"));
+    $resultnumrows = mysqli_query($conn, "SELECT * FROM request");
+    $totalRows = mysqli_num_rows($resultnumrows);
     $totalPages = ceil($totalRows / $rowsPerPage);
 
-    // Previous page button
-    if ($currentPage > 1) {
+    if(isset($_GET['order'])) {
+      // Previous page button
+      if ($currentPage > 1) {
+        echo "<a href='requests.php?order=".$sort_order."&page=" . ($currentPage - 1) . "' class='mx-2 px-4 py-2 bg-stone-500 text-white rounded-3xl'>Previous</a>";
+    }
+
+    // Page numbers
+    for ($i = 1; $i <= $totalPages; $i++) {
+        echo "<a href='requests.php?order=".$sort_order."&page=$i' class='mx-2 px-4 py-2 bg-stone-500 text-white rounded-3xl'>$i</a>";
+    }
+
+    // Next page button
+    if ($currentPage < $totalPages) {
+        echo "<a href='requests.php?order=".$sort_order."&page=" . ($currentPage + 1) . "' class='mx-2 px-4 py-2 bg-stone-500 text-white rounded-3xl'>Next</a>";
+    }
+    }
+    else if (isset($_GET['progvalue'])) {
+      // Previous page button
+      if ($currentPage > 1) {
+        echo "<a href='requests.php?progvalue=".$program."&page=" . ($currentPage - 1) . "' class='mx-2 px-4 py-2 bg-stone-500 text-white rounded-3xl'>Previous</a>";
+    }
+
+    // Page numbers
+    for ($i = 1; $i <= $totalPages; $i++) {
+        echo "<a href='requests.php?progvalue=".$program."&page=$i' class='mx-2 px-4 py-2 bg-stone-500 text-white rounded-3xl'>$i</a>";
+    }
+
+    // Next page button
+    if ($currentPage < $totalPages) {
+        echo "<a href='requests.php?progvalue=".$program."&page=" . ($currentPage + 1) . "' class='mx-2 px-4 py-2 bg-stone-500 text-white rounded-3xl'>Next</a>";
+    }
+    }
+    else {
+      // Previous page button
+      if ($currentPage > 1) {
         echo "<a href='requests.php?page=" . ($currentPage - 1) . "' class='mx-2 px-4 py-2 bg-stone-500 text-white rounded-3xl'>Previous</a>";
     }
 
@@ -293,14 +562,14 @@ $query = mysqli_query($conn, $sql);
     // Next page button
     if ($currentPage < $totalPages) {
         echo "<a href='requests.php?page=" . ($currentPage + 1) . "' class='mx-2 px-4 py-2 bg-stone-500 text-white rounded-3xl'>Next</a>";
-    }
+    }}
     ?>
-</div>
+    </div>
 <!--PAGE BUTTON END-->
-
-    <script src="table.js"></script>
+        
+<script src="table.js"></script>
     <script>
-  $(document).ready(function(){
+      $(document).ready(function(){
    $('#getName').on("keyup", function(){
      var getName = $(this).val();
      $.ajax({
@@ -314,6 +583,32 @@ $query = mysqli_query($conn, $sql);
      });
    });
   });
-</script>
+      
+          function SORTdropdown() {
+            document.getElementById("sortDropdown").classList.toggle("show");
+          }
+
+          function YLdropdown() {
+            document.getElementById("ylDropdown").classList.toggle("show");
+          }
+
+          function PROGRAMdropdown() {
+            document.getElementById("programDropdown").classList.toggle("show");
+          }
+
+          // Close the dropdown menu if the user clicks outside of it
+          window.onclick = function (event) {
+            if (!event.target.matches('#dropbtn')) {
+              var dropdowns = document.getElementsByClassName("dropdown-content");
+              var i;
+              for (i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                  openDropdown.classList.remove('show');
+                }
+              }
+            }
+          }
+        </script>
 </body>
 </html>

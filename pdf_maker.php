@@ -2,9 +2,9 @@
 require 'db_conn.php'; 
 include_once('tcpdf_6_2_13/tcpdf/tcpdf.php');
 
-$MST_ID=$_GET['MST_ID'];
+$MST_ID=$_GET['ctrl_num'];
 
-$inv_mst_query = "SELECT T1.MST_ID, T1.INV_NO, T1.CUSTOMER_NAME, T1.CUSTOMER_MOBILENO, T1.ADDRESS FROM INVOICE_MST T1 WHERE T1.MST_ID='".$MST_ID."' ";             
+$inv_mst_query = "SELECT stud_num, , T1.CUSTOMER_NAME, T1.CUSTOMER_MOBILENO, T1.ADDRESS FROM INVOICE_MST T1 WHERE T1.MST_ID='".$MST_ID."' ";             
 $inv_mst_results = mysqli_query($con,$inv_mst_query);   
 $count = mysqli_num_rows($inv_mst_results);  
 if($count>0) 

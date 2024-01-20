@@ -69,7 +69,99 @@ include("db_conn.php");
          
         </nav>
       </header>
-      <h1
+      <div class="mt-0 mr-0.5 -mb-0.5 pt-16">
+          <section
+            class="gap-5 flex max-md:flex-col max-md:items-stretch max-md:gap-0"
+          >
+            <div
+              class="flex flex-col items-stretch w-[42%] max-md:w-full max-md:ml-0"
+            >
+              <div
+                class="flex flex-col items-stretch mt-20 px-5 max-md:max-w-full max-md:mt-10"
+              >
+                <h1
+                  class="text-red-950 text-4xl font-extrabold mr-5 max-md:max-w-full max-md:text-4xl max-md:leading-[71px]"
+                >
+                  Request Successfully Sent
+                </h1>
+                <p
+        class="text-orange-950 text-lg leading-8 w-full mr-5 mt-6 max-md:max-w-full"
+      >
+        <span>Please ensure all required details are accurately provided before submitting your request to the registrar.
+        </span></br>
+        <span>Once done, entrust the process to us, and your 
+        <span class="font-bold">Certificate of Grades</span>
+        <span>will be prepared within
+        <span class="font-bold">7 working days</span>
+        <span>.</span>
+      </p>
+                <div
+                  class="flex items-stretch justify-between gap-5 -mr-5 mt-9 pr-20 max-md:max-w-full max-md:flex-wrap max-md:pr-5"
+                >
+                 
+                  <button class="text-stone-100 text-center w-fit text-lg font-semibold leading-6 bg-[#ab644d] p-4 items-center rounded-xl" onclick="generateQR()">Generate QR Code</button>
+                  
+                  
+                </div>
+              </div>
+            </div>
+
+            <!-- component -->
+            <!-- This is an example component -->
+            <div class="max-w-2xl mx-auto">
+           
+      
+    <div class="md:flex md:items-center">
+      <p class="text-center mt-5 ml-12 mr-8 mb-10">Here is your Control Number for your request, which will be used for you to claim your form. Please keep this Control Number and the generated QR code confidential and do not share it with anyone. If you have any inquiries, please feel free to contact the registrar. Thank you!</p>   
+    </div>
+<?php
+                  $sql="SELECT ctrl_num FROM request ORDER BY ctrl_num DESC LIMIT 1;";
+                  $result=mysqli_query($conn,$sql);
+                  $theone=mysqli_fetch_assoc($result)
+                  ?>
+                  <div class="flex justify-center">
+                  <input type="text" class="bg-inherit text-center p-2 border rounded-xl border-solid border-orange-950" value="<?php echo $theone['ctrl_num'];?>"  id="qrText" readonly>
+                  </div>
+
+      <div id="imgBox">
+        <img src="" id="qrImage" />
+      </div>
+    </section>
+    
+    <script src="script.js"></script>
+
+    <script>
+      let imgBox = document.getElementById("imgBox");
+      let qrImage = document.getElementById("qrImage");
+      let qrText = document.getElementById("qrText");
+      let input = document.querySelector("input");
+      let generatebtn = document.querySelector("generate");
+      let downloadbtn = document.querySelector("download");
+
+      function generateQR() {
+        if (qrText.value.length > 0) {
+          qrImage.src =
+            " https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" +
+            qrText.value;
+          imgBox.classList.add("show-img");
+        } else {
+          qrText.classList.add("error");
+          setTimeout(() => {
+            qrText.classList.remove("error");
+          }, 1000);
+        }
+      }
+      downloadbtn.addEventListener("click", async () => {
+        let response = await fetch(qrImage.src.replace("150x150", "300x300"));
+        let blob = await response.blob();
+        let downloadLink = document.createElement("a");
+        downloadLink.href = URL.createObjectURL(blob);
+        downloadLink.download = "qrImage.jpg";
+        downloadLink.click();
+      });
+    </script> 
+      <!--
+<h1
         class="text-orange-950 text-4xl font-extrabold leading-[54px] w-[1012px] ml-4 mt-20 max-md:max-w-full max-md:mt-10"
       >
         Request Successfully sent
@@ -90,7 +182,7 @@ include("db_conn.php");
     <div class="container">
       <p>Here is your control number, pls generate the mf qr code son of a bij. its not a suggestion, its a command.</p>
      
-                 <?php
+      <?php
                   $sql="SELECT ctrl_num FROM request ORDER BY ctrl_num DESC LIMIT 1;";
                   $result=mysqli_query($conn,$sql);
                   $theone=mysqli_fetch_assoc($result)
@@ -139,6 +231,8 @@ include("db_conn.php");
         downloadLink.click();
       });
     </script>
+      -->
+      
     
   </body>
 </html>

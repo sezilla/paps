@@ -2,17 +2,32 @@
 require 'db_conn.php';
 
 if(isset($_POST["submit"])){
-    $fullname = $_POST['fullname'];
-    $student_num = $_POST['student_num'];
-    $program = $_POST['program'];
-    $yr_sec = $_POST['yr_sec'];
-    $dob = $_POST['dob'];
-    $sem = $_POST['sem']; 
-    $purpose = $_POST['purpose'];
+    $year_lvl = $_POST['year_lvl'];
+    $program= $_POST['program'];
+    $first_n = $_POST['first_n'];
+    $mid_n = $_POST['mid_n'];
+    $last_n = $_POST['last_n']; 
+    $sex = $_POST['sex'];
+    $bday = $_POST['bday'];
+    $civstatus = $_POST['civstatus'];
+    $contactno = $_POST['contactno'];
+    $email = $_POST['email'];
+    $religion = $_POST['religion'];
+    $street = $_POST['street']; 
+    $country = $_POST['country']; 
+    $province = $_POST['province']; 
+    $municipality = $_POST['municipality']; 
+    $barangay = $_POST['barangay']; 
+    $zip_code = $_POST['zip_code']; 
+    $elem_school = $_POST['elem_school'];
+    $jh_school = $_POST['jh_school'];
+    $sh_school = $_POST['sh_school'];
+    $vocational = $_POST['vocational']; 
+    $college_trans = $_POST['college_trans'];
 
 
-  $query = "INSERT INTO request (fullname,student_num,program,yr_sec,dob,sem,purpose,reqtype) 
-  VALUES ('$fullname','$student_num','$program','$yr_sec','$dob','$sem', '$purpose', 'Transcript of Records')";
+  $query = "INSERT INTO enrollees (year_lvl, program, first_n, mid_n, last_n, sex, bday, civstatus, contactno, email, religion, street, country, province, municipality, barangay, zip_code, elem_school, jh_school, sh_school, vocational, college_trans) 
+  VALUES ('$year_lvl','$program','$first_n','$mid_n','$last_n', '$sex', '$bday', '$civstatus', '$contactno', '$email', '$religion', '$street', '$country', '$province', '$municipality', '$barangay', '$zip_code', '$elem_school', '$jh_school', '$sh_school', '$vocational','$college_trans')";
 
 
   mysqli_query($conn,$query);
@@ -20,7 +35,7 @@ if(isset($_POST["submit"])){
 
 
 
-window.location.href="formrequest.html";
+window.location.href="student_home.html";
 </script><?php
 
 
@@ -148,16 +163,16 @@ window.location.href="formrequest.html";
                     >
                       <select
                         type="text"
-                        id="yr_lvl"
-                        name="yr_lvl"
+                        id="year_lvl"
+                        name="year_lvl"
                         placeholder="Year level"
                         class="bg-[#eff0f2] mt-3 py-3 px-5 w-full border border-gray-300 p-3 focus:outline-none focus:ring-[#ab644d] focus:ring-1 rounded-[50px] max-md:pl-1"                        autocomplete="off"
                         >
                         <option value=" "> </option>
-                        <option value="1-1">1st Year</option>
-                        <option value="1-2">2nd Year</option>
-                        <option value="1-3">3rd Year</option>
-                        <option value="1-4">4th Year</option>
+                        <option value="1">1st Year</option>
+                        <option value="2">2nd Year</option>
+                        <option value="3">3rd Year</option>
+                        <option value="4">4th Year</option>
                       
                       
                       </select>
@@ -200,24 +215,7 @@ window.location.href="formrequest.html";
                   </div>
                 </div>
 
-                <div
-                  class="flex flex-col items-stretch w-[35%] ml-5 max-md:w-full max-md:ml-0"
-                >
-                  <div class="items-stretch flex grow flex-col max-md:mt-10">
-                    <label
-                      for="acad_yr"
-                      class="text-[#401b1b] text-base font-bold leading-6 whitespace-nowrap"
-                      >Academic Year</label
-                    >
-                    <input
-                      id="acad_yr"
-                      name="acad_yr"
-                      class="bg-[#eff0f2] mt-3 py-3 px-5 w-full border border-gray-300 p-3 focus:outline-none focus:ring-[#ab644d] focus:ring-1 rounded-[50px] max-md:pl-1"
-                      placeholder="e.g. 2024-2025"
-                      required
-                    />
-                  </div>
-                </div>
+                
 
               </div>
             </div>
@@ -242,8 +240,8 @@ window.location.href="formrequest.html";
                     >
 
                     <input
-                      id="fname"
-                      name="fname"
+                      id="first_n"
+                      name="first_n"
                       class="bg-[#eff0f2] mt-3 py-3 px-5 w-full border border-gray-300 p-3 focus:outline-none focus:ring-[#ab644d] focus:ring-1 rounded-[50px] max-md:pl-1"
                       placeholder="e.g. Juan"
                       required
@@ -261,8 +259,8 @@ window.location.href="formrequest.html";
                       >Middle Name</label
                     >
                     <input
-                      id="mname"
-                      name="mname"
+                      id="mid_n"
+                      name="mid_n"
                       class="bg-[#eff0f2] mt-3 py-3 px-5 w-full border border-gray-300 p-3 focus:outline-none focus:ring-[#ab644d] focus:ring-1 rounded-[50px] max-md:pl-1"
                       placeholder="e.g. Gregorio"
                       required
@@ -282,8 +280,8 @@ window.location.href="formrequest.html";
 
                     <input
                       type="text"
-                      id="lname"
-                      name="lname"
+                      id="last_n"
+                      name="last_n"
                       placeholder="e.g. Dela Cruz"
                       required
                       class="bg-[#eff0f2] mt-3 py-3 px-5 w-full border border-gray-300 p-3 focus:outline-none focus:ring-[#ab644d] focus:ring-1 rounded-[50px] max-md:pl-1"
@@ -323,9 +321,9 @@ window.location.href="formrequest.html";
                         class="bg-[#eff0f2] mt-3 py-3 px-5 w-full border border-gray-300 p-3 focus:outline-none focus:ring-[#ab644d] focus:ring-1 rounded-[50px] max-md:pl-1"                        autocomplete="off"
                         >
                         <option value=" "> </option>
-                        <option value="1">Male</option>
-                        <option value="1">Female</option>
-                        <option value="1">Rather not say</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="ayoko">Rather not say</option>
                       </select>
 
                       <div
@@ -349,8 +347,8 @@ window.location.href="formrequest.html";
                     >
                     <input
                       type="date"
-                      id="dob"
-                      name="dob"
+                      id="bday"
+                      name="bday"
                       class="bg-[#eff0f2] mt-3 py-3 px-5 w-full border border-gray-300 p-3 focus:outline-none focus:ring-[#ab644d] focus:ring-1 rounded-[50px] max-md:pl-1"
                       placeholder="Date of Birth"
                       required
@@ -407,20 +405,20 @@ window.location.href="formrequest.html";
                     >
                       <select
                         type="text"
-                        id="sex"
-                        name="sex"
-                        placeholder="Sex"
+                        id="civstatus"
+                        name="civstatus"
+                        placeholder="e.g. Single"
                         class="bg-[#eff0f2] mt-3 py-3 px-5 w-full border border-gray-300 p-3 focus:outline-none focus:ring-[#ab644d] focus:ring-1 rounded-[50px] max-md:pl-1"                        autocomplete="off"
                         >
                         <option value=" "> </option>
-                        <option value="1">Single</option>
-                        <option value="1">Married</option>
-                        <option value="1">Widowed</option>
-                        <option value="1">Divorced</option>
+                        <option value="single">Single</option>
+                        <option value="married">Married</option>
+                        <option value="byuda">Widowed</option>
+                        <option value="inayawan">Divorced</option>
                       </select>
 
                       <div
-                        id="dropdown_sex"
+                        id="dropdown_civstatus"
                         class="w-full h-60 border border-gray-300 rounded-md bg-[#eff0f2] absolute overflow-y-auto hidden"
                       ></div>
                     </div>
@@ -439,8 +437,8 @@ window.location.href="formrequest.html";
                       >Contact Number</label
                     >
                     <input
-                      id="num"
-                      name="num"
+                      id="contactno"
+                      name="contactno"
 
                       class="bg-[#eff0f2] mt-3 py-3 px-5 w-full border border-gray-300 p-3 focus:outline-none focus:ring-[#ab644d] focus:ring-1 rounded-[50px] max-md:pl-1"
                       placeholder="+63 912 345 6789"
@@ -514,8 +512,8 @@ window.location.href="formrequest.html";
                       >Country</label
                     >
                     <input
-                      id="count"
-                      name="count"
+                      id="country"
+                      name="country"
                       class="bg-[#eff0f2] mt-3 py-3 px-5 w-full border border-gray-300 p-3 focus:outline-none focus:ring-[#ab644d] focus:ring-1 rounded-[50px] max-md:pl-1"
                       placeholder="e.g. Philippines"
                       required
@@ -535,8 +533,8 @@ window.location.href="formrequest.html";
 
                     <input
                       type="text"
-                      id="prov"
-                      name="prov"
+                      id="province"
+                      name="province"
                       placeholder="e.g. Cavite"
                       required
                       class="bg-[#eff0f2] mt-3 py-3 px-5 w-full border border-gray-300 p-3 focus:outline-none focus:ring-[#ab644d] focus:ring-1 rounded-[50px] max-md:pl-1"
@@ -561,8 +559,8 @@ window.location.href="formrequest.html";
                     >
 
                     <input
-                      id="muni"
-                      name="muni"
+                      id="municipality"
+                      name="municipality"
                       class="bg-[#eff0f2] mt-3 py-3 px-5 w-full border border-gray-300 p-3 focus:outline-none focus:ring-[#ab644d] focus:ring-1 rounded-[50px] max-md:pl-1"
                       placeholder="e.g. Bacoor"
                       required
@@ -580,8 +578,8 @@ window.location.href="formrequest.html";
                       >Barangay</label
                     >
                     <input
-                      id="brgy"
-                      name="brgy"
+                      id="barangay"
+                      name="barangay"
                       class="bg-[#eff0f2] mt-3 py-3 px-5 w-full border border-gray-300 p-3 focus:outline-none focus:ring-[#ab644d] focus:ring-1 rounded-[50px] max-md:pl-1"
                       placeholder="e.g. Molino"   
                       required
@@ -601,8 +599,8 @@ window.location.href="formrequest.html";
 
                     <input
                       type="text"
-                      id="zip"
-                      name="zip"
+                      id="zip_code"
+                      name="zip_code"
                       placeholder="e.g. 4114"
                       required
                       class="bg-[#eff0f2] mt-3 py-3 px-5 w-full border border-gray-300 p-3 focus:outline-none focus:ring-[#ab644d] focus:ring-1 rounded-[50px] max-md:pl-1"
@@ -641,8 +639,8 @@ window.location.href="formrequest.html";
                     >
 
                     <input
-                      id="elem"
-                      name="elem"
+                      id="elem_school"
+                      name="elem_school"
                       class="bg-[#eff0f2] mt-3 py-3 px-5 w-full border border-gray-300 p-3 focus:outline-none focus:ring-[#ab644d] focus:ring-1 rounded-[50px] max-md:pl-1"
                       placeholder="e.g. MAMS Academy"
                       required
@@ -713,8 +711,8 @@ window.location.href="formrequest.html";
                     >
 
                     <input
-                      id="elem"
-                      name="elem"
+                      id="jh_school"
+                      name="jh_school"
                       class="bg-[#eff0f2] mt-3 py-3 px-5 w-full border border-gray-300 p-3 focus:outline-none focus:ring-[#ab644d] focus:ring-1 rounded-[50px] max-md:pl-1"
                       placeholder="e.g. MAMS Academy"
                       required
@@ -785,8 +783,8 @@ window.location.href="formrequest.html";
                     >
 
                     <input
-                      id="elem"
-                      name="elem"
+                      id="sh_school"
+                      name="sh_school"
                       class="bg-[#eff0f2] mt-3 py-3 px-5 w-full border border-gray-300 p-3 focus:outline-none focus:ring-[#ab644d] focus:ring-1 rounded-[50px] max-md:pl-1"
                       placeholder="e.g. MAMS Academy"
                       required
@@ -858,8 +856,8 @@ window.location.href="formrequest.html";
                     >
 
                     <input
-                      id="elem"
-                      name="elem"
+                      id="vocational"
+                      name="vocational"
                       class="bg-[#eff0f2] mt-3 py-3 px-5 w-full border border-gray-300 p-3 focus:outline-none focus:ring-[#ab644d] focus:ring-1 rounded-[50px] max-md:pl-1"
                       placeholder="e.g. MAMS Academy"
                       required
@@ -930,8 +928,8 @@ window.location.href="formrequest.html";
                     >
 
                     <input
-                      id="elem"
-                      name="elem"
+                      id="college_trans"
+                      name="college_trans"
                       class="bg-[#eff0f2] mt-3 py-3 px-5 w-full border border-gray-300 p-3 focus:outline-none focus:ring-[#ab644d] focus:ring-1 rounded-[50px] max-md:pl-1"
                       placeholder="e.g. MAMS Academy"
                       required
@@ -1000,15 +998,21 @@ window.location.href="formrequest.html";
               <div
                 class="text-pink-900 text-justify text-lg leading-8 grow shrink basis-auto max-md:max-w-full"
               >
-              <input type="checkbox" id="applynow" name="applynow" value="apply">
-              <label for="applynow" class="text-pink-900 text-justify text-lg leading-8 grow shrink basis-auto max-md:max-w-full">I hereby certify that all information stated above are true and correct</label><br>
-                    
-                </label>
-                <span class="">
-                  as to the best of my knowledge. I hereby give consent for my personal
-                  data included in my offer to be processed for the purpose of my
-                  admmission and enrollment accordance with
-                </span>
+              <span class="font-extrabold">
+              I hereby certify that all information stated above is true and correct to the best of my knowledge. 
+                  </span><br>
+              <form action="/action_page.php">
+                <input type="checkbox" id="apply" name="apply" value="apply" required>
+                <label for="applynow">By ticking this checkbox...</label>
+                  <ul class="list-disc pl-5">
+          <li>I willingly provide consent for the processing of my personal data, which is included in my offer, for the purpose of my admission and enrollment in accordance with applicable regulations and policies.</li>
+          <li>I understand that the information provided will be used solely for the aforementioned purposes and will be handled in compliance with data protection laws.
+                I acknowledge that any false or misleading information may result in the rejection of my application or subsequent disciplinary action.</li>
+          <li>By signing this declaration, I affirm my commitment to uphold the standards and policies set forth by the institution and declare my understanding of the implications of providing false information.</li>
+          </ul>
+              </span>
+
+                </label><br>
               </div>
             </div>
               <button type="submit" name="submit" class="justify-center items-center shadow-2xl bg-[#AC644C] flex w-[244px] max-w-full gap-2 mt-20 px-12 py-7 rounded-[40px] self-center max-md:mt-10 max-md:px-5">

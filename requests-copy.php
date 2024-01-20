@@ -13,6 +13,10 @@ if (isset($_GET['progvalue'])) {
   $program = $_GET['progvalue'];
 }
 
+if (isset($_GET['yrsec'])) {
+  $yrsec = $_GET['yrsec'];
+}
+
 
 // Number of rows per page
 $rowsPerPage = 10;
@@ -292,10 +296,24 @@ $query = mysqli_query($conn, $sql);
                   class="aspect-square object-contain object-center w-full overflow-hidden shrink-0 flex-1"></button>
               </div>
               <div id="ylDropdown" class="dropdown-content">
-                <a href="requests-copy.php?column=">1</a>
-                <a href="requests-copy.php?column=">2</a>
-                <a href="requests-copy.php?column=">3</a>
-                <a href="requests-copy.php?column=">4</a>
+              <?php 
+          
+          $sql = "SELECT DISTINCT yr_sec from request";
+          $result = $conn-> query($sql);
+
+          if ($result-> num_rows > 0) {
+              while ($row =  $result-> fetch_assoc()){
+                //$program = $row['program'];
+                echo "<a href='requests-copy.php?column=yr_sec&yrsec=". $row["yr_sec"]."'>". $row["yr_sec"]."</a>";
+                //echo "<option value= '". $row["program"]."'>". $row["program"]."</a>";
+              }
+          }
+          else{
+              echo "0 results";
+          }
+
+          //$conn-> close();
+          ?>
               </div>
             </div>
 
@@ -321,6 +339,7 @@ $query = mysqli_query($conn, $sql);
               <div id="sortDropdown" class="dropdown-content">
                 <a href="requests-copy.php?column=reqtype&order=asc">Ascending</a>
                 <a href="requests-copy.php?column=reqtype&order=desc">Descending</a>
+                <a href="requests-copy.php">Default</a>
               </div>  
             </div>
         </div>
@@ -339,7 +358,7 @@ $query = mysqli_query($conn, $sql);
                 <th class="text-orange-950 font-semibold leading-6">Name</th>
                 <th class="text-orange-950 font-semibold leading-6">Student No.</th>
                 <th class="text-orange-950 font-semibold leading-6">Control No.</th>
-                <th class="text-orange-950 font-semibold leading-6">Date of Birth</th>
+                <th class="text-orange-950 font-semibold leading-6">Year Level</th>
                 <th class="text-orange-950 font-semibold leading-6">Program</th>
                 <th class="text-orange-950 font-semibold leading-6">Form Type</th>
                 <th class="text-orange-950 font-semibold leading-6">Action</th>
@@ -350,16 +369,16 @@ $query = mysqli_query($conn, $sql);
           include("db_conn.php");
           
           if (isset($_GET['order'])){
-            $sql = "SELECT fullname, student_num, ctrl_num, dob, program, reqtype from request ORDER BY reqtype $sort_order";
+            $sql = "SELECT fullname, student_num, ctrl_num, yr_sec, program, reqtype from request ORDER BY reqtype $sort_order";
           }
           else if (isset($_GET['progvalue'])){
-            $sql = "SELECT fullname, student_num, ctrl_num, dob, program, reqtype from request WHERE program = '$program'";
+            $sql = "SELECT fullname, student_num, ctrl_num, yr_sec, program, reqtype from request WHERE program = '$program'";
           }
           else if (isset($_GET['order']) && isset($_GET['progvalue'])) {
-            $sql = "SELECT fullname, student_num, ctrl_num, dob, program, reqtype from request WHERE program = '$program' ORDER BY reqtype $sort_order";
+            $sql = "SELECT fullname, student_num, ctrl_num, yr_sec, program, reqtype from request WHERE program = '$program' ORDER BY reqtype $sort_order";
           }
           else {
-            $sql = "SELECT fullname, student_num, ctrl_num, dob, program, reqtype from request";
+            $sql = "SELECT fullname, student_num, ctrl_num, yr_sec, program, reqtype from request";
           }
           
           
@@ -371,7 +390,7 @@ $query = mysqli_query($conn, $sql);
                   <td>". $row["fullname"]."</td>
                   <td>". $row["student_num"]."</td>
                   <td>". $row["ctrl_num"]."</td>
-                  <td>". $row["dob"]."</td>
+                  <td>". $row["yr_sec"]."</td>
                   <td>". $row["program"]."</td>
                   <td>". $row["reqtype"]."</td>
                   <td>
@@ -389,19 +408,22 @@ $query = mysqli_query($conn, $sql);
           ?-->
           <?php 
           if (isset($_GET['order'])){
-            $sql = "SELECT fullname, student_num, ctrl_num, dob, program, reqtype from request ORDER BY reqtype $sort_order LIMIT $limitStart, $rowsPerPage";
+            $sql = "SELECT fullname, student_num, ctrl_num, yr_sec, program, reqtype from request ORDER BY reqtype $sort_order LIMIT $limitStart, $rowsPerPage";
           }
           else if (isset($_GET['progvalue'])){
-            $sql = "SELECT fullname, student_num, ctrl_num, dob, program, reqtype from request WHERE program = '$program' LIMIT $limitStart, $rowsPerPage";
+            $sql = "SELECT fullname, student_num, ctrl_num, yr_sec, program, reqtype from request WHERE program = '$program' LIMIT $limitStart, $rowsPerPage";
+          }
+          else if (isset($_GET['yrsec'])){
+            $sql = "SELECT fullname, student_num, ctrl_num, yr_sec, program, reqtype from request WHERE yr_sec = '$yrsec' LIMIT $limitStart, $rowsPerPage";
           }
           else if (isset($_GET['order']) && isset($_GET['progvalue'])) {
-            $sql = "SELECT fullname, student_num, ctrl_num, dob, program, reqtype from request WHERE program = '$program' ORDER BY reqtype $sort_order LIMIT $limitStart, $rowsPerPage";
+            $sql = "SELECT fullname, student_num, ctrl_num, yr_sec, program, reqtype from request WHERE program = '$program' ORDER BY reqtype $sort_order LIMIT $limitStart, $rowsPerPage";
           }
           else {
-            $sql = "SELECT fullname, student_num, ctrl_num, dob, program, reqtype from request LIMIT $limitStart, $rowsPerPage";
+            $sql = "SELECT fullname, student_num, ctrl_num, yr_sec, program, reqtype from request LIMIT $limitStart, $rowsPerPage";
           }
           
-          //$sql = "SELECT fullname, student_num, ctrl_num, dob, program, reqtype from request";
+          //$sql = "SELECT fullname, student_num, ctrl_num, yr_sec, program, reqtype from request";
           
           $result = $conn-> query($sql);   
           while ($row = mysqli_fetch_assoc($result)) { ?>
@@ -409,7 +431,7 @@ $query = mysqli_query($conn, $sql);
             <td><?php echo $row["fullname"]; ?></td>
             <td><?php echo $row["student_num"]; ?></td>
             <td><?php echo $row["ctrl_num"]; ?></td>
-            <td><?php echo $row["dob"]; ?></td>
+            <td><?php echo $row["yr_sec"]; ?></td>
             <td><?php echo $row["program"]; ?></td>
             <td><?php echo $row["reqtype"]; ?></td>
             <td>
@@ -429,8 +451,41 @@ $query = mysqli_query($conn, $sql);
     $totalRows = mysqli_num_rows($resultnumrows);
     $totalPages = ceil($totalRows / $rowsPerPage);
 
-    // Previous page button
-    if ($currentPage > 1) {
+    if(isset($_GET['order'])) {
+      // Previous page button
+      if ($currentPage > 1) {
+        echo "<a href='requests-copy.php?order=".$sort_order."&page=" . ($currentPage - 1) . "' class='mx-2 px-4 py-2 bg-stone-500 text-white rounded-3xl'>Previous</a>";
+    }
+
+    // Page numbers
+    for ($i = 1; $i <= $totalPages; $i++) {
+        echo "<a href='requests-copy.php?order=".$sort_order."&page=$i' class='mx-2 px-4 py-2 bg-stone-500 text-white rounded-3xl'>$i</a>";
+    }
+
+    // Next page button
+    if ($currentPage < $totalPages) {
+        echo "<a href='requests-copy.php?order=".$sort_order."&page=" . ($currentPage + 1) . "' class='mx-2 px-4 py-2 bg-stone-500 text-white rounded-3xl'>Next</a>";
+    }
+    }
+    else if (isset($_GET['progvalue'])) {
+      // Previous page button
+      if ($currentPage > 1) {
+        echo "<a href='requests-copy.php?progvalue=".$program."&page=" . ($currentPage - 1) . "' class='mx-2 px-4 py-2 bg-stone-500 text-white rounded-3xl'>Previous</a>";
+    }
+
+    // Page numbers
+    for ($i = 1; $i <= $totalPages; $i++) {
+        echo "<a href='requests-copy.php?progvalue=".$program."&page=$i' class='mx-2 px-4 py-2 bg-stone-500 text-white rounded-3xl'>$i</a>";
+    }
+
+    // Next page button
+    if ($currentPage < $totalPages) {
+        echo "<a href='requests-copy.php?progvalue=".$program."&page=" . ($currentPage + 1) . "' class='mx-2 px-4 py-2 bg-stone-500 text-white rounded-3xl'>Next</a>";
+    }
+    }
+    else {
+      // Previous page button
+      if ($currentPage > 1) {
         echo "<a href='requests-copy.php?page=" . ($currentPage - 1) . "' class='mx-2 px-4 py-2 bg-stone-500 text-white rounded-3xl'>Previous</a>";
     }
 
@@ -442,7 +497,7 @@ $query = mysqli_query($conn, $sql);
     // Next page button
     if ($currentPage < $totalPages) {
         echo "<a href='requests-copy.php?page=" . ($currentPage + 1) . "' class='mx-2 px-4 py-2 bg-stone-500 text-white rounded-3xl'>Next</a>";
-    }
+    }}
     ?>
     </div>
 <!--PAGE BUTTON END-->
